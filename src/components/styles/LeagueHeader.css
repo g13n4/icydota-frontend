@@ -1,0 +1,10 @@
+.menu-header {
+  display: "flex";
+  align-items: "center";
+  padding: 0;
+}
+
+.menu-menu {
+  flex: 1;
+  min-width: "50vh";
+}
