@@ -11,13 +11,16 @@ const MainPage = () => {
     const [leagueId, setLeagueId] = useState(null);
     const [dataCategory, setDataCategory] = useState({
         match_id: null,
-        data_type: "total",
-        is_comparison: false,
-        comparison: "none",
+        data_field: "l2",
+        aggregation_type: null,
+        lane: true,
+        comparison: null,
         flat: true,
         is_aggregation: false,
-        is_match: true,
-        aggregation_type: "player",
+        is_comparison: false,
+        is_cross_comparison: false,
+        performance_menu: "data",
+        performance_submenu: "total",
     });
 
     const {
@@ -32,7 +35,10 @@ const MainPage = () => {
             />
             <Layout>
                 <Flex style={{ maxWidth: "90%" }}>
-                    <PerformanceMenu setDataCategory={setDataCategory} />
+                    <PerformanceMenu
+                        dataCategory={dataCategory}
+                        setDataCategory={setDataCategory}
+                    />
                     <DataContent
                         dataCategory={dataCategory}
                         setDataCategory={setDataCategory}
