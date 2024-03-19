@@ -4,19 +4,25 @@ import { Layout, Menu, theme } from "antd";
 import axios from "axios";
 import { Col, Row, Divider } from "antd";
 
-const { Header, Content, Footer, Sider } = Layout;
+const getDefault = (key) => {
+    if (key === "total") {
+        return { cross_data_field: "total_gold" };
+    } else {
+        return { cross_data_field: "l2" };
+    }
+};
 
 const setData = (keyName) => {
     const performance_menu = keyName;
+    const is_basic = performance_menu.includes("data");
     const is_comparison = performance_menu.includes("comparison");
     const is_aggregation = performance_menu.includes("aggregation");
     const is_cross_comparison = performance_menu.includes("cross");
     return {
         performance_menu: performance_menu,
+        is_basic: is_basic,
         is_comparison: is_comparison,
-        comparison: is_comparison ? "player" : null,
         is_aggregation: is_aggregation,
-        aggregation_type: is_aggregation ? "player" : null,
         is_cross_comparison: is_cross_comparison,
     };
 };
@@ -24,6 +30,8 @@ const setData = (keyName) => {
 const PerformanceMenu = ({ dataCategory, setDataCategory }) => {
     const [categoryMenuItems, setCategoryMenuItems] = useState([]);
     const [dataTypeItems, setDataTypeItems] = useState([]);
+
+    const defaultCross = {};
 
     useEffect(() => {
         axios
@@ -76,6 +84,7 @@ const PerformanceMenu = ({ dataCategory, setDataCategory }) => {
                         return {
                             ...prevState,
                             performance_submenu: item.key,
+                            ...getDefault(item.key),
                         };
                     })
                 }

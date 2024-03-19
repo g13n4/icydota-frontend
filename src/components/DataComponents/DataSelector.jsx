@@ -3,7 +3,6 @@ import axios from "axios";
 import { Col, Flex, Cascader, Radio } from "antd";
 import { SheetComponent } from "@antv/s2-react";
 import { setLang } from "@antv/s2";
-import "@antv/s2-react/dist/style.min.css";
 import { compact } from "lodash";
 
 const getAggregationRadioData = ({ turnedOn }) => {

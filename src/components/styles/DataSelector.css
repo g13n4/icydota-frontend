@@ -1,0 +1,7 @@
+.data-selector {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    row-gap: "1em";
+    height: "2em";
+}

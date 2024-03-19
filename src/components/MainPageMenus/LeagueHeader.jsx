@@ -1,37 +1,36 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Menu, Layout } from "antd";
 import axios from "axios";
-
 const { Header } = Layout;
-const { useState, useEffect } = React;
 import "./../styles/LeagueHeader.css";
+import { useDispatch, useSelector } from "react-redux"
 
-const LeagueHeader = ({ leagueId, setLeagueId }) => {
-  const [menuItems, setMenuItems] = useState([]);
 
-  useEffect(() => {
-    axios.get("http://127.0.0.1:8000/league_header/").then((res) => {
-      setMenuItems(res.data);
-      setLeagueId(res.data[0].key.toString());
-    });
-  }, []);
+const LeagueHeader = () => {
+    const leagueMenu = useSelector(state => state.menu.leagueMenu)
+    const leagueMenuDefault = useSelector(state => state.menu.leagueMenuDefault)
+    console.log(leagueMenu, leagueMenuDefault)
 
-  return (
-    <>
-      {leagueId && (
-        <Header className="menu-header">
-          <Menu
-            theme="light"
-            mode="horizontal"
-            defaultSelectedKeys={[leagueId]}
-            onClick={(e) => setLeagueId(e.key)}
-            items={menuItems}
-            className="menu-menu"
-          />
-        </Header>
-      )}
-    </>
-  );
+
+    useEffect(() => {
+        axios.get("http://127.0.0.1:8000/league_header/").then((res) => {
+            setMenuItems(res.data);
+            setLeagueId(res.data[0].key.toString());
+        });
+    }, []);
+
+    return (leagueMenuDefault &&
+            <Header className="menu-header">
+                <Menu
+                    theme="light"
+                    mode="horizontal"
+                    defaultSelectedKeys={leagueMenuDefault}
+                    onClick={(e) => setLeagueId(e.key)}
+                    items={leagueMenu}
+                    className="menu-menu"
+                />
+            </Header>
+    );
 };
 
 export default LeagueHeader;

@@ -4,10 +4,13 @@ import PerformanceMenu from "./MainPageMenus/PerformanceMenu";
 import MenuHeader from "./MainPageMenus/LeagueHeader";
 import { Flex, Radio, Col } from "antd";
 import DataContent from "./DataComponents/DataContent";
+import { useDispatch, useSelector } from "react-redux";
 
 const { Content, Footer } = Layout;
 
 const MainPage = () => {
+
+    
     const [leagueId, setLeagueId] = useState(null);
     const [dataCategory, setDataCategory] = useState({
         match_id: null,
@@ -19,6 +22,7 @@ const MainPage = () => {
         is_aggregation: false,
         is_comparison: false,
         is_cross_comparison: false,
+        is_basic: true,
         performance_menu: "data",
         performance_submenu: "total",
     });

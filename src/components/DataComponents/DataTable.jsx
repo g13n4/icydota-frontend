@@ -1,17 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
-import { Col, Row } from "antd";
 import { SheetComponent } from "@antv/s2-react";
 import { setLang } from "@antv/s2";
 import "@antv/s2-react/dist/style.min.css";
-import { compact, isEmpty } from "lodash";
 
 setLang("en_US");
 
-var darkTheme;
-var colours;
+let darkTheme;
+let colours;
 if (
-    window.matchMedia &&
+    window.matchMedia ||
     window.matchMedia("(prefers-color-scheme: dark)").matches
 ) {
     darkTheme = true;
@@ -56,7 +53,7 @@ const getTargetColor = (name, value, min, max) => {
     if (Number.isNaN(Number(value))) {
         return nanColour;
     }
-    if (min == max && value) {
+    if (min === max && value) {
         return colours[9];
     }
 
@@ -101,50 +98,47 @@ const DataTable = ({ tableData }) => {
         },
         theme: "dark",
         conditions: {
-            background: [
-                ...tableData.table_values.map((item) => {
-                    return {
-                        field: item.col,
-                        mapping(value) {
-                            const cellColour = getTargetColor(
-                                item.col,
-                                value,
-                                item.min,
-                                item.max
-                            );
+            background: tableData.table_values.map((item) => {
+                return {
+                    field: item.col,
+                    mapping(value) {
+                        const cellColour = getTargetColor(
+                            item.col,
+                            value,
+                            item.min,
+                            item.max
+                        );
 
-                            return {
-                                fill: cellColour,
-                            };
-                        },
-                    };
-                }),
-            ],
+                        return {
+                            fill: cellColour,
+                        };
+                    },
+                };
+            }),
         },
     };
 
     return (
-        <>
-            {tableData.table_data && windowSize.width && windowSize.height && (
-                <SheetComponent
-                    dataCfg={tableData.table_data}
-                    options={{
-                        ...tableOptions,
-                        ...tableData.table_options,
-                    }}
-                    adaptive={{
-                        width: true,
-                        height: false,
-                        getContainer: () =>
-                            document.getElementById("container"),
-                    }}
-                    sheetType="pivot"
-                    themeCfg={{
-                        name: darkTheme ? "dark" : "colorful",
-                    }}
-                />
-            )}
-        </>
+        tableData.table_data &&
+        windowSize.width &&
+        windowSize.height && (
+            <SheetComponent
+                dataCfg={tableData.table_data}
+                options={{
+                    ...tableOptions,
+                    ...tableData.table_options,
+                }}
+                adaptive={{
+                    width: true,
+                    height: false,
+                    getContainer: () => document.getElementById("container"),
+                }}
+                sheetType="pivot"
+                themeCfg={{
+                    name: darkTheme ? "dark" : "colorful",
+                }}
+            />
+        )
     );
 };
 
