@@ -1,52 +1,93 @@
 import {
-    UPDATE_AGGREGATION_TYPE,
-    UPDATE_AGGREGATION_COMPARISON,
-    UPDATE_CCOMP_POSITION,
-    UPDATE_CCOMP_TYPE,
-    UPDATE_CCOMP_DATA_FIELD,
-    UPDATE_COMPARISON,
-    UPDATE_FLAT,
+	UPDATE_AGGREGATION_TYPE,
+	UPDATE_AGGREGATION_COMPARISON,
+	UPDATE_CCOMP_POSITION,
+	UPDATE_CCOMP_TYPE,
+	UPDATE_CCOMP_DATA_FIELD,
+	UPDATE_COMPARISON,
+	UPDATE_FLAT,
+	UPDATE_GAME_STAGE,
 } from "./settingsConstants";
 
-const defaultMenuState = {
-    // aggregation
-    aggregationType: "player",
-    aggregationComparison: false,
-    // cross comparison
-    ccompPosition: "core",
-    ccompType: "player",
-    ccompTotalField: "total_gold",
-    ccompWindowField: "l2",
-    // comparison
-    comparison: "player",
-    flat: true,
-    // bools
-    is_basic: true,
-    is_aggregation: false,
-    is_comparison: false,
-    is_ccomp: false,
+const defaultSettings = {
+	gameStage: "both",
+	// aggregation
+	aggregationType: "player",
+	aggregationComparison: false,
+	// cross comparison
+	ccompPosition: "core",
+	ccompType: "player",
+	ccompTotalField: "total_gold",
+	ccompWindowField: "l2",
+	// comparison
+	comparison: "player",
+	flat: true,
 };
 
-export const settingsReducer = (state = defaultMenuState, action) => {
-    switch (action.type) {
-        case UPDATE_AGGREGATION_TYPE:
-            return { ...state, aggregationType: action.payload };
-        case UPDATE_AGGREGATION_COMPARISON:
-            return {
-                ...state,
-                aggregationComparison: !state.aggregationComparison,
-            };
-        case UPDATE_CCOMP_POSITION:
-            return { ...state, ccompPosition: action.payload };
-        case UPDATE_CCOMP_TYPE:
-            return { ...state, ccompType: action.payload };
-        case UPDATE_CCOMP_DATA_FIELD:
-            return { ...state, ccompTotalField: action.payload };
-        case UPDATE_COMPARISON:
-            return { ...state, comparison: action.payload };
-        case UPDATE_FLAT:
-            return { ...state, flat: !state.flat };
-        default:
-            return state;
-    }
+// biome-ignore lint/style/useDefaultParameterLast: <explanation>
+export const settingsReducer = (state = defaultSettings, action) => {
+	switch (action.type) {
+		case UPDATE_AGGREGATION_TYPE:
+			return { ...state, aggregationType: action.payload };
+		case UPDATE_AGGREGATION_COMPARISON:
+			return {
+				...state,
+				aggregationComparison: !state.aggregationComparison,
+			};
+		case UPDATE_CCOMP_POSITION:
+			return { ...state, ccompPosition: action.payload };
+		case UPDATE_CCOMP_TYPE:
+			return { ...state, ccompType: action.payload };
+		case UPDATE_CCOMP_DATA_FIELD:
+			return { ...state, ccompTotalField: action.payload };
+		case UPDATE_COMPARISON:
+			return { ...state, comparison: action.payload };
+		case UPDATE_FLAT:
+			console.log(action.payload);
+			return { ...state, flat: action.payload };
+		case UPDATE_GAME_STAGE:
+			return { ...state, gameStage: action.payload };
+		default:
+			return state;
+	}
 };
+
+export const updateAggregationTypeAction = (payload) => ({
+	type: UPDATE_AGGREGATION_TYPE,
+	payload,
+});
+
+export const updateAggregationCompariosnAction = (payload) => ({
+	type: UPDATE_AGGREGATION_COMPARISON,
+	payload,
+});
+
+export const updateCCompPositionAction = (payload) => ({
+	type: UPDATE_CCOMP_POSITION,
+	payload,
+});
+
+export const updateCCompTypeAction = (payload) => ({
+	type: UPDATE_CCOMP_TYPE,
+	payload,
+});
+
+export const updateCCompDataFieldAction = (payload) => ({
+	type: UPDATE_CCOMP_DATA_FIELD,
+	payload,
+});
+
+export const updateComparisonAction = (payload) => ({
+	type: UPDATE_COMPARISON,
+	payload,
+});
+
+export const updateFlatAction = (payload) => ({
+	type: UPDATE_FLAT,
+	payload,
+});
+
+export const updateGameStageAction = (payload) => ({
+	type: UPDATE_GAME_STAGE,
+	payload,
+});

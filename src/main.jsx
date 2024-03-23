@@ -5,29 +5,25 @@ import { ConfigProvider, theme } from "antd";
 import en_US from "antd/locale/en_US.js";
 import { store } from "./store/index.js";
 import { Provider } from "react-redux";
-import { getMenu } from "./actions/menu";
+import { getMenu, changeTheme } from "./actions/menu";
 
 store.dispatch(getMenu());
 
 const themeData = [theme.compactAlgorithm];
 if (
-    window.matchMedia ||
-    window.matchMedia("(prefers-color-scheme: dark)").matches
+	window.matchMedia ||
+	window.matchMedia("(prefers-color-scheme: dark)").matches
 ) {
-    themeData.push(theme.darkAlgorithm);
+	themeData.push(theme.darkAlgorithm);
+	store.dispatch(changeTheme());
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
-        <ConfigProvider
-            theme={{
-                algorithm: themeData,
-            }}
-            locale={en_US}
-        >
-            <Provider store={store}>
-                <MainPage />
-            </Provider>
-        </ConfigProvider>
-    </React.StrictMode>
+	<React.StrictMode>
+		<Provider store={store}>
+			<ConfigProvider locale={en_US} theme={{ algorithm: themeData }}>
+				<MainPage />
+			</ConfigProvider>
+		</Provider>
+	</React.StrictMode>,
 );

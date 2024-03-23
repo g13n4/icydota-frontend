@@ -1,46 +1,43 @@
 import React from "react";
 import { Flex, Radio } from "antd";
 import FlatPercentRadio from "./FlatPercentRadio";
+import { updateSettings } from "../../actions/settings";
+import { useDispatch, useSelector } from "react-redux";
 
-const getComparisonRadioData = ({ turnedOn }) => {
-    return [
-        {
-            label: "To position average",
-            value: "general",
-        },
-        {
-            label: "To each other",
-            value: "player",
-            disabled: turnedOn,
-        },
-    ];
+const getComparisonRadioData = () => {
+	return [
+		{
+			label: "To position average",
+			value: "general",
+		},
+		{
+			label: "To each other",
+			value: "player",
+		},
+	];
 };
 
-const ComparisonRadio = ({ dataCategory, setDataCategory }) => {
-    const comparisonRadioData = getComparisonRadioData(
-        dataCategory.is_aggregation
-    );
+const ComparisonRadio = () => {
+	const dispatch = useDispatch();
 
-    return (
-        <Flex gap={"large"}>
-            <FlatPercentRadio
-                dataCategory={dataCategory}
-                setDataCategory={setDataCategory}
-            />
-            <Radio.Group
-                options={comparisonRadioData}
-                onChange={(e) => {
-                    setDataCategory((prevState) => ({
-                        ...prevState,
-                        comparison: e.target.value,
-                    }));
-                }}
-                value={dataCategory.comparison}
-                optionType="button"
-                buttonStyle="solid"
-            />
-        </Flex>
-    );
+	const { comparison } = useSelector((state) => state.settings);
+
+	const comparisonRadioData = getComparisonRadioData();
+
+	return (
+		<Flex gap={"large"}>
+			<FlatPercentRadio />
+			<Radio.Group
+				options={comparisonRadioData}
+				onChange={(e) => {
+					dispatch(updateSettings("comparison", e.target.value));
+				}}
+				value={comparison}
+				optionType="button"
+				buttonStyle="solid"
+			/>
+		</Flex>
+	);
 };
 
 export default ComparisonRadio;

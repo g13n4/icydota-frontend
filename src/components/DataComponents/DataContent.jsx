@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
-import axios from "axios";
-//import DataTable from "./DataTable";
+import DataTable from "./DataTable";
 import { Layout, Flex } from "antd";
 const { Content } = Layout;
 const { useState, useEffect } = React;
@@ -8,54 +7,106 @@ import DataSelectorAgg from "./DataSelectorAgg";
 import DataSelectorBasic from "./DataSelectorBasic";
 import DataSelectorCross from "./DataSelectorCross";
 import getTableData from "./../../utils/getTableData";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
-const getDataSelector = (dataCategory) => {
-    if (dataCategory.is_basic) {
-        return DataSelectorBasic;
-    } else if (dataCategory.is_aggregation) {
-        return DataSelectorAgg;
-    } else if (dataCategory.is_cross_comparison) {
-        return DataSelectorCross;
-    }
-    throw new Error("No category is chosen!", dataCategory);
+const getDataSelector = (isData, isAggregation, isCross) => {
+	if (isData) {
+		return DataSelectorBasic;
+	}
+	if (isAggregation) {
+		return DataSelectorAgg;
+	}
+	if (isCross) {
+		return DataSelectorCross;
+	}
 };
 
-const DataContent = ({ dataCategory, setDataCategory, leagueId }) => {
-    const [menuData, setMenuData] = useState(null);
+const DataContent = () => {
+	const [menuData, setMenuData] = useState(null);
 
-    const ref = useRef(null);
+	const ref = useRef(null);
 
-    const DataSelector = getDataSelector(dataCategory);
+	const {
+		menuSelected,
+		leagueMenuSelected,
+		leagueGameSelected,
+		submenuSelected,
+		submenuComparisonSelected,
+		totalFieldsSelected,
+		windowFieldsSelected,
+		isData,
+		isComparison,
+		isAggregation,
+		isCross,
+		isLoaded,
+	} = useSelector((state) => state.menuSelected);
 
-    // axious data request
-    useEffect(() => {
-        getTableData({ dataCategory, setMenuData, leagueId });
-    }, [dataCategory, leagueId]);
+	const {
+		gameStage,
+		aggregationType,
+		aggregationComparison,
+		ccompPosition,
+		ccompType,
+		comparison,
+		flat,
+	} = useSelector((state) => state.settings);
 
-    return (
-        <Content
-            style={{ margin: "24px 16px 0" }}
-            ref={ref}
-        >
-            <Flex
-                vertical={true}
-                gap={"middle"}
-            >
-                <DataSelector
-                    dataCategory={dataCategory}
-                    setDataCategory={setDataCategory}
-                    leagueId={leagueId}
-                />
-                {/* {menuData && (
-                    <DataTable
-                        tableData={menuData}
-                        dataCategory={dataCategory}
-                        parentRef={ref}
-                    />
-                )} */}
-            </Flex>
-        </Content>
-    );
+	const DataSelector = getDataSelector(isData, isAggregation, isCross);
+	useEffect(() => {
+		if (isLoaded) {
+			const [link, params] = getTableData({
+				leagueMenuSelected,
+				leagueGameSelected,
+				submenuSelected,
+				submenuComparisonSelected,
+				totalFieldsSelected,
+				windowFieldsSelected,
+				isData,
+				isComparison,
+				isAggregation,
+				isCross,
+				gameStage,
+				aggregationType,
+				aggregationComparison,
+				ccompPosition,
+				ccompType,
+				comparison,
+				flat,
+			});
+
+			axios.get(link, params).then((res) => {
+				setMenuData(res.data);
+			});
+		}
+	}, [
+		leagueMenuSelected,
+		leagueGameSelected,
+		submenuSelected,
+		menuSelected,
+		submenuComparisonSelected,
+		totalFieldsSelected,
+		windowFieldsSelected,
+		gameStage,
+		aggregationType,
+		aggregationComparison,
+		ccompPosition,
+		ccompType,
+		comparison,
+		flat,
+		isLoaded,
+	]);
+
+	return (
+		isLoaded && (
+			<Content style={{ margin: "24px 16px 0" }} ref={ref}>
+				<Flex vertical={true} gap={"middle"}>
+					<DataSelector />
+					{menuData && <DataTable tableData={menuData} parentRef={ref} />}
+				</Flex>
+			</Content>
+		)
+	);
 };
 
 export default DataContent;

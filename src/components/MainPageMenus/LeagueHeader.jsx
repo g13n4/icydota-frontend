@@ -1,36 +1,30 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, Layout } from "antd";
 import axios from "axios";
 const { Header } = Layout;
 import "./../styles/LeagueHeader.css";
-import { useDispatch, useSelector } from "react-redux"
-
+import { useDispatch, useSelector } from "react-redux";
+import { setSelected } from "../../actions/menuSelected";
 
 const LeagueHeader = () => {
-    const leagueMenu = useSelector(state => state.menu.leagueMenu)
-    const leagueMenuDefault = useSelector(state => state.menu.leagueMenuDefault)
-    console.log(leagueMenu, leagueMenuDefault)
+	const dispatch = useDispatch();
 
+	const { leagueMenu, leagueMenuDefault } = useSelector((state) => state.menu);
 
-    useEffect(() => {
-        axios.get("http://127.0.0.1:8000/league_header/").then((res) => {
-            setMenuItems(res.data);
-            setLeagueId(res.data[0].key.toString());
-        });
-    }, []);
-
-    return (leagueMenuDefault &&
-            <Header className="menu-header">
-                <Menu
-                    theme="light"
-                    mode="horizontal"
-                    defaultSelectedKeys={leagueMenuDefault}
-                    onClick={(e) => setLeagueId(e.key)}
-                    items={leagueMenu}
-                    className="menu-menu"
-                />
-            </Header>
-    );
+	return (
+		leagueMenu.length > 0 && (
+			<Header className="menu-header">
+				<Menu
+					theme="light"
+					mode="horizontal"
+					defaultSelectedKeys={[leagueMenuDefault]}
+					onClick={(e) => dispatch(setSelected("league", e.key))}
+					items={leagueMenu}
+					className="menu-menu"
+				/>
+			</Header>
+		)
+	);
 };
 
 export default LeagueHeader;

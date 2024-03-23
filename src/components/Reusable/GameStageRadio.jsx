@@ -1,42 +1,42 @@
 import React from "react";
 import { Radio } from "antd";
-
+import { useDispatch, useSelector } from "react-redux";
+import { updateSettings } from "../../actions/settings";
 const getGameStage = () => {
-    return [
-        {
-            label: "Lane",
-            value: "lane",
-        },
-        {
-            label: "Game",
-            value: "game",
-        },
-        {
-            label: "Both",
-            value: "both",
-        },
-    ];
+	return [
+		{
+			label: "Lane",
+			value: "lane",
+		},
+		{
+			label: "Game",
+			value: "game",
+		},
+		{
+			label: "Both",
+			value: "both",
+		},
+	];
 };
 
-const GameStageRadio = ({ dataCategory, setDataCategory }) => {
-    const gameStageData = getGameStage();
+const GameStageRadio = () => {
+	const gameStageData = getGameStage();
 
-    return (
-        <>
-            <Radio.Group
-                options={gameStageData}
-                onChange={(e) => {
-                    setDataCategory((prevState) => ({
-                        ...prevState,
-                        game_stage: e.target.value,
-                    }));
-                }}
-                value={dataCategory.game_stage}
-                optionType="button"
-                buttonStyle="solid"
-            />
-        </>
-    );
+	const dispatch = useDispatch();
+
+	const { gameStage } = useSelector((state) => state.settings);
+
+	return (
+		<Radio.Group
+			options={gameStageData}
+			onChange={(e) => {
+				dispatch(updateSettings("game_stage", e.target.value));
+			}}
+			value={gameStage}
+			optionType="button"
+			buttonStyle="solid"
+		/>
+	);
 };
 
 export default GameStageRadio;

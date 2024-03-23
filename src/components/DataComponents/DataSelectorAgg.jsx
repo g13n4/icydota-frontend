@@ -1,58 +1,56 @@
 import React from "react";
-import { Col, Flex, Button, Radio } from "antd";
+import { Flex, Radio } from "antd";
 import "./../styles/DataSelector.css";
 import GameStageRadio from "../Reusable/GameStageRadio";
 import FlatPercentRadio from "../Reusable/FlatPercentRadio";
+import { useDispatch, useSelector } from "react-redux";
+import { updateSettings } from "../../actions/settings";
 
 const getAggregationRadioData = () => {
-    return [
-        {
-            label: "By Hero",
-            value: "hero",
-        },
-        {
-            label: "By Player",
-            value: "player",
-        },
-        {
-            label: "By Position",
-            value: "position",
-        },
-    ];
+	return [
+		{
+			label: "By Hero",
+			value: "hero",
+		},
+		{
+			label: "By Player",
+			value: "player",
+		},
+		{
+			label: "By Position",
+			value: "position",
+		},
+	];
 };
 
-const DataSelectorAgg = ({ setDataCategory, dataCategory }) => {
-    const aggregationRadioData = getAggregationRadioData();
+const DataSelectorAgg = () => {
+	const aggregationRadioData = getAggregationRadioData();
+	const dispatch = useDispatch();
 
-    return (
-        <Flex className="data-selector">
-            <Radio.Group
-                options={aggregationRadioData}
-                onChange={(e) => {
-                    setDataCategory((prevState) => ({
-                        ...prevState,
-                        aggregation_type: e.target.value,
-                    }));
-                }}
-                value={dataCategory.aggregation_type}
-                optionType="button"
-                buttonStyle="solid"
-                disabled={dataCategory.is_match}
-            />
-            {dataCategory.performance_submenu !== "total" && (
-                <GameStageRadio
-                    setDataCategory={setDataCategory}
-                    dataCategory={dataCategory}
-                />
-            )}
-            {dataCategory.is_comparison && (
-                <FlatPercentRadio
-                    setDataCategory={setDataCategory}
-                    dataCategory={dataCategory}
-                />
-            )}
-        </Flex>
-    );
+	const { isComparison, submenuSelected } = useSelector(
+		(state) => state.menuSelected,
+	);
+	const { aggregationType } = useSelector((state) => state.settings);
+
+	return (
+		<Flex className="data-selector">
+			<Radio.Group
+				options={aggregationRadioData}
+				onChange={(e) => {
+					dispatch(updateSettings("aggregation_type", e.target.value));
+				}}
+				value={aggregationType}
+				optionType="button"
+				buttonStyle="solid"
+			/>
+			{submenuSelected !== "total" && <GameStageRadio />}
+			{isComparison && (
+				<>
+					<FlatPercentRadio />
+				</>
+			)}
+		</Flex>
+	);
 };
 
 export default DataSelectorAgg;

@@ -1,66 +1,56 @@
-import React, { useRef } from "react";
-import axios from "axios";
+import BACKEND_ADDRESS from "../appSettings";
 
-const getLink = ({ dataCategory, leagueId }) => {
-    const base = "http://127.0.0.1:8000";
+const getTableData = ({
+	// menuSelected
+	leagueMenuSelected,
+	leagueGameSelected,
+	submenuSelected,
+	submenuComparisonSelected,
+	totalFieldsSelected,
+	windowFieldsSelected,
+	isComparison,
+	isAggregation,
+	isCross,
+	// settings
+	gameStage,
+	aggregationType,
+	ccompPosition,
+	ccompType,
+	comparison,
+	flat,
+}) => {
+	let link = BACKEND_ADDRESS;
 
-    if (dataCategory.is_cross_comparison) {
-        const dc = "performance_cross_comparison";
+	const params = {
+		data_type: isComparison ? submenuComparisonSelected : submenuSelected,
+		flat: flat,
+	};
 
-        return `${base}/${dc}/${leagueId}/${dataCategory.cross_comparison_type}/${dataCategory.cross_comparison_position}/`;
-    } else if (dataCategory.is_aggregation) {
-        const dc = "performance_aggregated_data";
+	if (isCross) {
+		const dc = "performance_cross_comparison";
+		link += `/${dc}/${leagueMenuSelected}/${ccompType}/${ccompPosition}/`;
 
-        return `${base}/${dc}/${leagueId}/${dataCategory.aggregation_type}/`;
-    } else if (dataCategory.is_basic) {
-        const dc = "performance_data";
+		params.data_field =
+			params.data_type === "total" ? totalFieldsSelected : windowFieldsSelected;
+	} else {
+		params.game_stage = gameStage;
 
-        return `${base}/${dc}/${dataCategory.match_id}/`;
-    }
-};
+		if (isAggregation) {
+			const dc = "performance_aggregated_data";
+			link += `/${dc}/${leagueMenuSelected}/${aggregationType}/`;
+			if (isComparison) {
+				params.comparison = "general";
+			}
+		} else {
+			const dc = "performance_data";
+			link += `/${dc}/${leagueGameSelected}/`;
+			if (isComparison) {
+				params.comparison = comparison;
+			}
+		}
+	}
 
-const getParams = ({ dataCategory }) => {
-    const comparison = {};
-    if (!dataCategory.is_cross_comparison & dataCategory.is_comparison) {
-        comparison.comparison = dataCategory.comparison;
-        comparison.flat = dataCategory.flat;
-    }
-
-    if (dataCategory.is_cross_comparison) {
-        return {
-            params: {
-                data_field: dataCategory.cross_data_field,
-                data_type: dataCategory.performance_submenu,
-                flat: dataCategory.flat,
-            },
-        };
-    } else if (dataCategory.is_aggregation) {
-        return {
-            params: {
-                ...comparison,
-                data_type: dataCategory.performance_submenu,
-                game_stage: dataCategory.game_stage,
-                comparison: dataCategory.is_comparison ? "general" : "none",
-            },
-        };
-    } else if (dataCategory.is_basic) {
-        return {
-            params: {
-                data_type: dataCategory.performance_submenu,
-                game_stage: dataCategory.game_stage,
-                ...comparison,
-            },
-        };
-    }
-};
-
-const getTableData = ({ dataCategory, setMenuData, leagueId }) => {
-    const link = getLink({ dataCategory, leagueId });
-    const params = getParams({ dataCategory });
-
-    axios.get(link, params).then((res) => {
-        setMenuData(res.data);
-    });
+	return [link, { params: params }];
 };
 
 export default getTableData;

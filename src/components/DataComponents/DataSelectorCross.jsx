@@ -1,96 +1,87 @@
 import React, { useState, useEffect } from "react";
 import { Flex, Radio, Cascader } from "antd";
-import axios from "axios";
 import "./../styles/DataSelector.css";
 import FlatPercentRadio from "../Reusable/FlatPercentRadio";
+import { updateSettings } from "../../actions/settings";
+import { useDispatch, useSelector } from "react-redux";
 
 const getAggregationRadioData = () => {
-    return [
-        {
-            label: "By Position and Hero",
-            value: "hero",
-        },
-        {
-            label: "By Position and Player",
-            value: "player",
-        },
-    ];
+	return [
+		{
+			label: "By Position and Hero",
+			value: "hero",
+		},
+		{
+			label: "By Position and Player",
+			value: "player",
+		},
+	];
 };
 
 const getPositionRadioData = () => {
-    return [
-        {
-            label: "Core",
-            value: "core",
-        },
-        {
-            label: "Mid",
-            value: "mid",
-        },
-        {
-            label: "Support",
-            value: "support",
-        },
-    ];
+	return [
+		{
+			label: "Core",
+			value: "core",
+		},
+		{
+			label: "Mid",
+			value: "mid",
+		},
+		{
+			label: "Support",
+			value: "support",
+		},
+	];
 };
 
-const DataSelectorCross = ({ setDataCategory, dataCategory }) => {
-    const [fieldList, setFieldList] = useState([]);
+const DataSelectorCross = () => {
+	const dispatch = useDispatch();
 
-    const aggregationRadioData = getAggregationRadioData();
-    const positionRadioData = getPositionRadioData();
+	const { totalFields, totalFieldsDefault, windowFields, windowFieldsDefault } =
+		useSelector((state) => state.menu);
 
-    const field =
-        dataCategory.performance_submenu === "total" ? "total" : "window";
+	const { submenuSelected } = useSelector((state) => state.menuSelected);
 
-    useEffect(() => {
-        axios.get(`http://127.0.0.1:8000/field/${field}/`).then((res) => {
-            setFieldList(res.data);
-        });
-    }, [dataCategory.performance_submenu]);
+	const { ccompType, ccompPosition } = useSelector((state) => state.settings);
 
-    return (
-        <Flex className="data-selector">
-            <Cascader
-                defaultValue={[dataCategory.cross_data_field]}
-                options={fieldList}
-                onChange={(e) => {
-                    setDataCategory((prevState) => ({
-                        ...prevState,
-                        cross_data_field: e[0],
-                    }));
-                }}
-            />
-            <FlatPercentRadio
-                dataCategory={dataCategory}
-                setDataCategory={setDataCategory}
-            />
-            <Radio.Group
-                options={aggregationRadioData}
-                onChange={(e) => {
-                    setDataCategory((prevState) => ({
-                        ...prevState,
-                        cross_comparison_type: e.target.value,
-                    }));
-                }}
-                value={dataCategory.cross_comparison_type}
-                optionType="button"
-                buttonStyle="solid"
-            />
-            <Radio.Group
-                options={positionRadioData}
-                onChange={(e) => {
-                    setDataCategory((prevState) => ({
-                        ...prevState,
-                        cross_comparison_position: e.target.value,
-                    }));
-                }}
-                value={dataCategory.cross_comparison_position}
-                optionType="button"
-                buttonStyle="solid"
-            />
-        </Flex>
-    );
+	const aggregationRadioData = getAggregationRadioData();
+	const positionRadioData = getPositionRadioData();
+
+	return (
+		<Flex className="data-selector">
+			<Cascader
+				defaultValue={[
+					submenuSelected === "total"
+						? totalFieldsDefault
+						: windowFieldsDefault,
+				]}
+				options={submenuSelected === "total" ? totalFields : windowFields}
+				onChange={(e) => {
+					dispatch(updateSettings("ccomp_field", e[0]));
+				}}
+			/>
+			<FlatPercentRadio />
+			<Radio.Group
+				options={aggregationRadioData}
+				onChange={(e) => {
+					dispatch(updateSettings("ccomp_type", e.target.value));
+				}}
+				value={ccompType}
+				optionType="button"
+				buttonStyle="solid"
+			/>
+			<Radio.Group
+				options={positionRadioData}
+				onChange={(e) => {
+					dispatch(updateSettings("ccomp_position", e.target.value));
+				}}
+				value={ccompPosition}
+				optionType="button"
+				buttonStyle="solid"
+			/>
+		</Flex>
+	);
 };
 
 export default DataSelectorCross;
