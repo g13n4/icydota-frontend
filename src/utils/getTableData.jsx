@@ -1,5 +1,3 @@
-import BACKEND_ADDRESS from "../appSettings";
-
 const getTableData = ({
 	// menuSelected
 	leagueMenuSelected,
@@ -19,7 +17,7 @@ const getTableData = ({
 	ccompWindowField,
 	flat,
 }) => {
-	let link = BACKEND_ADDRESS;
+	let link = import.meta.env.VITE_BACKEND_ENDPOINT;
 	const ccompField =
 		submenuComparisonSelected === "total" ? ccompTotalField : ccompWindowField;
 
