@@ -21,12 +21,16 @@ const defaultMenuState = {
 	// submenu comparison
 	submenuComparison: [],
 	submenuComparisonDefault: [],
+	// submenu name fields
+	categoriesDict: {},
 	// cross comparison fields
 	totalFields: [],
 	totalFieldsDefault: [],
 	windowFields: [],
 	windowFieldsDefault: [],
 	darkTheme: false,
+	lastEditDate: "",
+	appVersion: "",
 	loaded: false,
 };
 

@@ -6,8 +6,6 @@ const getTableData = ({
 	leagueGameSelected,
 	submenuSelected,
 	submenuComparisonSelected,
-	totalFieldsSelected,
-	windowFieldsSelected,
 	isComparison,
 	isAggregation,
 	isCross,
@@ -17,9 +15,13 @@ const getTableData = ({
 	ccompPosition,
 	ccompType,
 	comparison,
+	ccompTotalField,
+	ccompWindowField,
 	flat,
 }) => {
 	let link = BACKEND_ADDRESS;
+	const ccompField =
+		submenuComparisonSelected === "total" ? ccompTotalField : ccompWindowField;
 
 	const params = {
 		data_type: isComparison ? submenuComparisonSelected : submenuSelected,
@@ -30,8 +32,7 @@ const getTableData = ({
 		const dc = "performance_cross_comparison";
 		link += `/${dc}/${leagueMenuSelected}/${ccompType}/${ccompPosition}/`;
 
-		params.data_field =
-			params.data_type === "total" ? totalFieldsSelected : windowFieldsSelected;
+		params.data_field = ccompField;
 	} else {
 		params.game_stage = gameStage;
 

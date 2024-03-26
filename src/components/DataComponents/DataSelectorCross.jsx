@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { Flex, Radio, Cascader } from "antd";
 import "./../styles/DataSelector.css";
 import FlatPercentRadio from "../Reusable/FlatPercentRadio";
@@ -38,29 +38,46 @@ const getPositionRadioData = () => {
 const DataSelectorCross = () => {
 	const dispatch = useDispatch();
 
-	const { totalFields, totalFieldsDefault, windowFields, windowFieldsDefault } =
-		useSelector((state) => state.menu);
+	const { totalFields, windowFields } = useSelector((state) => state.menu);
 
-	const { submenuSelected } = useSelector((state) => state.menuSelected);
+	const {
+		submenuComparisonSelected,
+		totalFieldsSelected,
+		windowFieldsSelected,
+	} = useSelector((state) => state.menuSelected);
 
 	const { ccompType, ccompPosition } = useSelector((state) => state.settings);
 
 	const aggregationRadioData = getAggregationRadioData();
 	const positionRadioData = getPositionRadioData();
 
+	const isTotal = submenuComparisonSelected === "total";
+
 	return (
 		<Flex className="data-selector">
-			<Cascader
-				defaultValue={[
-					submenuSelected === "total"
-						? totalFieldsDefault
-						: windowFieldsDefault,
-				]}
-				options={submenuSelected === "total" ? totalFields : windowFields}
-				onChange={(e) => {
-					dispatch(updateSettings("ccomp_field", e[0]));
-				}}
-			/>
+			{isTotal ? (
+				<Cascader
+					className="cascade-total"
+					changeOnSelect={true}
+					defaultValue={[totalFieldsSelected]}
+					options={totalFields}
+					onChange={(e) => {
+						dispatch(updateSettings("ccomp_field_total", e[0]));
+					}}
+				/>
+			) : (
+				<>
+					<Cascader
+						className="window-total"
+						changeOnSelect={true}
+						defaultValue={[windowFieldsSelected]}
+						options={windowFields}
+						onChange={(e) => {
+							dispatch(updateSettings("ccomp_field_window", e[0]));
+						}}
+					/>
+				</>
+			)}
 			<FlatPercentRadio />
 			<Radio.Group
 				options={aggregationRadioData}

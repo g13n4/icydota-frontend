@@ -4,28 +4,25 @@ import { setLang } from "@antv/s2";
 import { useSelector } from "react-redux";
 setLang("en_US");
 
-let darkTheme;
-let colours;
-if (
-	window.matchMedia ||
-	window.matchMedia("(prefers-color-scheme: dark)").matches
-) {
-	darkTheme = true;
-	colours = [
-		"#e27c7c",
-		"#a86464",
-		"#6d4b4b",
-		"#503f3f",
-		"#333333",
-		"#3c4e4b",
-		"#456661",
-		"#466964",
-		"#599e94",
-		"#6cd4c5",
-	];
-} else {
-	darkTheme = false;
-	colours = [
+import "@antv/s2/dist/style.min.css"; // used to create tooltips
+
+const getColours = (isDarkTheme) => {
+	if (isDarkTheme) {
+		return [
+			"#e27c7c",
+			"#a86464",
+			"#6d4b4b",
+			"#503f3f",
+			"#333333",
+			"#3c4e4b",
+			"#456661",
+			"#466964",
+			"#599e94",
+			"#6cd4c5",
+		];
+	}
+
+	return [
 		"#115f9a",
 		"#1984c5",
 		"#22a7f0",
@@ -38,17 +35,11 @@ if (
 		"#de6e56",
 		"#c23728",
 	];
-}
-const nanColour = "#a4a7a5d6";
-
-const defaultTableSettings = {
-	interaction: {
-		selectedCellsSpotlight: false,
-		hoverHighlight: false,
-	},
 };
 
-const getTargetColor = (name, value, min, max) => {
+const nanColour = "#a4a7a5d6";
+
+const getTargetColor = (colours, value, min, max) => {
 	if (Number.isNaN(Number(value))) {
 		return nanColour;
 	}
@@ -66,7 +57,11 @@ const resize = (size, minValue, coef) => {
 };
 
 const DataTable = ({ tableData }) => {
+	const { menuSelected } = useSelector((state) => state.menuSelected);
+
 	const { darkTheme } = useSelector((state) => state.menu);
+
+	const colours = getColours(darkTheme);
 
 	const [windowSize, setWindowSize] = useState({
 		width: resize(window.innerWidth, 640, 0.85),
@@ -92,19 +87,18 @@ const DataTable = ({ tableData }) => {
 	const tableOptions = {
 		interaction: {
 			selectedCellsSpotlight: false,
-			hoverHighlight: false,
+			hoverHighlight: menuSelected === "cross_comparison" ? true : false,
 		},
 		style: {
 			layoutWidthType: "colAdaptive",
 		},
-		theme: "dark",
 		conditions: {
 			background: tableData.table_values.map((item) => {
 				return {
 					field: item.col,
 					mapping(value) {
 						const cellColour = getTargetColor(
-							item.col,
+							colours,
 							value,
 							item.min,
 							item.max,
@@ -127,7 +121,6 @@ const DataTable = ({ tableData }) => {
 				dataCfg={tableData.table_data}
 				options={{
 					...tableOptions,
-					...tableData.table_options,
 				}}
 				adaptive={{
 					width: true,

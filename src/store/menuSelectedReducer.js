@@ -13,6 +13,8 @@ import {
 	IS_CROSS,
 	SET_BOOL_STATUS,
 	MENU_SELECTED_IS_LOADED,
+	CATEGORY_NAME,
+	CATEGORY_NAME_COMPARISON,
 } from "./menuSelectedConstants";
 
 const defaultSelected = {
@@ -89,6 +91,10 @@ export const menuSelectedReducer = (state = defaultSelected, action) => {
 			return { ...state, isData: action.payload };
 		case IS_AGGREGATION:
 			return { ...state, isAggregation: action.payload };
+		case CATEGORY_NAME_COMPARISON:
+			return { ...state, categoryNameComparison: action.payload };
+		case CATEGORY_NAME:
+			return { ...state, categoryName: action.payload };
 		case IS_CROSS:
 			return { ...state, isCross: action.payload };
 		case MENU_SELECTED_IS_LOADED:
@@ -168,5 +174,15 @@ export const SetBoolStatusAction = (payload) => ({
 
 export const SetMenuSelectedIsLoadedAction = (payload) => ({
 	type: MENU_SELECTED_IS_LOADED,
+	payload,
+});
+
+export const SetCategoryNameAction = (payload) => ({
+	type: CATEGORY_NAME,
+	payload,
+});
+
+export const SetCategoryNameComparisonAction = (payload) => ({
+	type: CATEGORY_NAME_COMPARISON,
 	payload,
 });

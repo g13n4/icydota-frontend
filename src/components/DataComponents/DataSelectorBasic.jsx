@@ -24,7 +24,6 @@ const DataSelectorBasic = () => {
 					defaultValue={[leagueGameSelected]}
 					options={leagueGames}
 					onChange={(e) => {
-						console.log(e);
 						dispatch(setLeagueGameSelectedAction(e[0]));
 					}}
 				/>

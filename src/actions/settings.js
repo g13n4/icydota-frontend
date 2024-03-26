@@ -3,7 +3,8 @@ import {
 	updateAggregationCompariosnAction,
 	updateCCompPositionAction,
 	updateCCompTypeAction,
-	updateCCompDataFieldAction,
+	updateCCompWindowFieldAction,
+	updateCCompTotalFieldAction,
 	updateComparisonAction,
 	updateFlatAction,
 	updateGameStageAction,
@@ -28,8 +29,12 @@ export const updateSettings = (selectedKey, value) => {
 				dispatch(updateCCompTypeAction(value));
 				break;
 			}
-			case "ccomp_field": {
-				dispatch(updateCCompDataFieldAction(value));
+			case "ccomp_field_total": {
+				dispatch(updateCCompTotalFieldAction(value));
+				break;
+			}
+			case "ccomp_field_window": {
+				dispatch(updateCCompWindowFieldAction(value));
 				break;
 			}
 			case "comparison": {

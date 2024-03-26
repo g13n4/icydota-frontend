@@ -44,11 +44,7 @@ const DataSelectorAgg = () => {
 				buttonStyle="solid"
 			/>
 			{submenuSelected !== "total" && <GameStageRadio />}
-			{isComparison && (
-				<>
-					<FlatPercentRadio />
-				</>
-			)}
+			{isComparison && <FlatPercentRadio />}
 		</Flex>
 	);
 };

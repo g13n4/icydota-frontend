@@ -8,6 +8,8 @@ import {
 	setWindowFieldSelectedAction,
 	SetBoolStatusAction,
 	SetMenuSelectedIsLoadedAction,
+	SetCategoryNameAction,
+	SetCategoryNameComparisonAction,
 } from "./../store/menuSelectedReducer";
 import { getLeagueGames } from "./menu";
 
@@ -42,6 +44,14 @@ export const setSelected = (selectedKey, value) => {
 			}
 			case "window": {
 				dispatch(setWindowFieldSelectedAction(value));
+				break;
+			}
+			case "name": {
+				dispatch(SetCategoryNameAction(value));
+				break;
+			}
+			case "name_comparison": {
+				dispatch(SetCategoryNameComparisonAction(value));
 				break;
 			}
 			case "loaded": {

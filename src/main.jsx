@@ -10,10 +10,7 @@ import { getMenu, changeTheme } from "./actions/menu";
 store.dispatch(getMenu());
 
 const themeData = [theme.compactAlgorithm];
-if (
-	window.matchMedia ||
-	window.matchMedia("(prefers-color-scheme: dark)").matches
-) {
+if (window?.matchMedia("(prefers-color-scheme: dark)").matches) {
 	themeData.push(theme.darkAlgorithm);
 	store.dispatch(changeTheme());
 }

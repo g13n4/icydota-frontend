@@ -2,25 +2,33 @@ import React from "react";
 import { Layout, Menu, theme } from "antd";
 import PerformanceMenu from "./MainPageMenus/PerformanceMenu";
 import MenuHeader from "./MainPageMenus/LeagueHeader";
+import PageFooter from "./otherComponents/PageFooter";
 import { Flex, Radio, Col } from "antd";
 import DataContent from "./DataComponents/DataContent";
+import PerformanceSubmenuName from "./DataComponents/PerformanceSubmenuName";
+import "./styles/MainPage.css";
 
 const { Content, Footer } = Layout;
 
 const MainPage = () => {
 	return (
-		<Layout className="main-layout">
-			<MenuHeader />
-			<Layout>
-				<Flex style={{ maxWidth: "90%" }}>
-					<PerformanceMenu />
-					<DataContent />
-				</Flex>
-				<Footer style={{ textAlign: "center" }}>
-					Ant Design ©{new Date().getFullYear()} Created by Ant UED
-				</Footer>
-			</Layout>
-		</Layout>
+		<div className="background-page">
+			<div className="main-page">
+				<Layout>
+					<MenuHeader />
+					<Layout>
+						<Flex>
+							<PerformanceMenu />
+							<Flex vertical={true} style={{ width: "100%" }}>
+								<PerformanceSubmenuName />
+								<DataContent />
+							</Flex>
+						</Flex>
+						<PageFooter />
+					</Layout>
+				</Layout>
+			</div>
+		</div>
 	);
 };
 

@@ -1,14 +1,17 @@
 import React, { useRef } from "react";
 import DataTable from "./DataTable";
-import { Layout, Flex } from "antd";
-const { Content } = Layout;
+import { Layout, Flex, Typography } from "antd";
 const { useState, useEffect } = React;
 import DataSelectorAgg from "./DataSelectorAgg";
 import DataSelectorBasic from "./DataSelectorBasic";
 import DataSelectorCross from "./DataSelectorCross";
 import getTableData from "./../../utils/getTableData";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
+import DataTableState from "./DataTableState";
+
+const { Title } = Typography;
+const { Content } = Layout;
 
 const getDataSelector = (isData, isAggregation, isCross) => {
 	if (isData) {
@@ -23,7 +26,7 @@ const getDataSelector = (isData, isAggregation, isCross) => {
 };
 
 const DataContent = () => {
-	const [menuData, setMenuData] = useState(null);
+	const [menuData, setMenuData] = useState({ loading: true });
 
 	const ref = useRef(null);
 
@@ -42,10 +45,14 @@ const DataContent = () => {
 		isLoaded,
 	} = useSelector((state) => state.menuSelected);
 
+	const { darkTheme } = useSelector((state) => state.menu);
+
 	const {
 		gameStage,
 		aggregationType,
 		aggregationComparison,
+		ccompTotalField,
+		ccompWindowField,
 		ccompPosition,
 		ccompType,
 		comparison,
@@ -71,13 +78,18 @@ const DataContent = () => {
 				aggregationComparison,
 				ccompPosition,
 				ccompType,
+				ccompTotalField,
+				ccompWindowField,
 				comparison,
 				flat,
 			});
 
-			axios.get(link, params).then((res) => {
-				setMenuData(res.data);
-			});
+			axios
+				.get(link, params)
+				.then((res) => {
+					setMenuData(res.data);
+				})
+				.catch((error) => setMenuData(error));
 		}
 	}, [
 		leagueMenuSelected,
@@ -85,8 +97,6 @@ const DataContent = () => {
 		submenuSelected,
 		menuSelected,
 		submenuComparisonSelected,
-		totalFieldsSelected,
-		windowFieldsSelected,
 		gameStage,
 		aggregationType,
 		aggregationComparison,
@@ -95,14 +105,34 @@ const DataContent = () => {
 		comparison,
 		flat,
 		isLoaded,
+		ccompTotalField,
+		ccompWindowField,
 	]);
 
 	return (
 		isLoaded && (
-			<Content style={{ margin: "24px 16px 0" }} ref={ref}>
+			<Content
+				style={{
+					margin: "5px 16px 0",
+					padding: "0 1% 2% 1%",
+					minHeight: "75vh",
+				}}
+				ref={ref}
+			>
 				<Flex vertical={true} gap={"middle"}>
 					<DataSelector />
-					{menuData && <DataTable tableData={menuData} parentRef={ref} />}
+					{!(menuData instanceof Error) ? (
+						menuData.loading ? (
+							<DataTableState
+								darkTheme={darkTheme}
+								loading={menuData.loading}
+							/>
+						) : (
+							menuData && <DataTable tableData={menuData} parentRef={ref} />
+						)
+					) : (
+						<DataTableState darkTheme={darkTheme} loading={false} />
+					)}
 				</Flex>
 			</Content>
 		)
