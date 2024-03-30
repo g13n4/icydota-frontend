@@ -3,5 +3,4 @@ FROM node:current-alpine3.18 as front
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY . /app/ 
-RUN npm install --force
-RUN npm run build
+RUN npm install --force && npm run build
