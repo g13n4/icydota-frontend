@@ -26,7 +26,8 @@ const getDataSelector = (isData, isAggregation, isCross) => {
 };
 
 const DataContent = () => {
-	const [menuData, setMenuData] = useState({ loading: true });
+	const menuDataDefaut = { loading: true };
+	const [menuData, setMenuData] = useState(menuDataDefaut);
 
 	const ref = useRef(null);
 
@@ -62,6 +63,7 @@ const DataContent = () => {
 	const DataSelector = getDataSelector(isData, isAggregation, isCross);
 	useEffect(() => {
 		if (isLoaded) {
+			setMenuData(menuDataDefaut);
 			const [link, params] = getTableData({
 				leagueMenuSelected,
 				leagueGameSelected,
