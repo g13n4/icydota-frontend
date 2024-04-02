@@ -8,4 +8,17 @@ export default defineConfig({
 		port: 8000,
 		host: true,
 	},
+	build: {
+		rollupOptions: {
+			output: {
+				manualChunks: {
+					antd: ["antd"],
+					react: ["react"],
+					redux: ["redux"],
+					lodash: ["lodash"],
+					axios: ["axios"],
+				},
+			},
+		},
+	},
 });
