@@ -4,6 +4,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSelected } from "../../actions/menuSelected";
 import "./../styles/PerformanceMenu.css";
 
+const MenuSelected = ({ defaultValue, items, dispatch, isComparison }) => {
+	return (
+		<Menu
+			defaultSelectedKeys={[defaultValue]}
+			mode={"vertical"}
+			theme={"light"}
+			items={items}
+			onClick={(item) => {
+				dispatchSelectedSubmenu(dispatch, isComparison, item);
+			}}
+			className="performance-submenu"
+			style={{
+				maxHeight: "100%",
+				width: "100%",
+				textAlign: "center",
+			}}
+		/>
+	);
+};
+
 const dispatchSelectedSubmenu = (dispatch, isComparison, item) => {
 	if (isComparison) {
 		dispatch(setSelected("submenu_comparison", item.key));
@@ -27,10 +47,6 @@ const PerformanceMenu = () => {
 		submenuComparisonSelected,
 	} = useSelector((state) => state.menuSelected);
 
-	const defaultSubmenu = isComparison
-		? submenuComparisonSelected
-		: submenuSelected;
-
 	return (
 		<Col flex={"auto"} style={{ flexDirection: "column", maxWidth: "15em" }}>
 			{menuSelected && (
@@ -45,21 +61,23 @@ const PerformanceMenu = () => {
 				/>
 			)}
 			<Divider orientation="center">Categories:</Divider>
-			<Menu
-				defaultSelectedKeys={[defaultSubmenu]}
-				mode={"vertical"}
-				theme={"light"}
-				items={isComparison ? submenuComparison : submenu}
-				onClick={(item) => {
-					dispatchSelectedSubmenu(dispatch, isComparison, item);
-				}}
-				className="performance-submenu"
-				style={{
-					maxHeight: "100%",
-					width: "100%",
-					textAlign: "center",
-				}}
-			/>
+			{isComparison ? (
+				<MenuSelected
+					defaultValue={submenuComparisonSelected}
+					items={submenuComparison}
+					dispatch={dispatch}
+					isComparison={true}
+				/>
+			) : (
+				<>
+					<MenuSelected
+						defaultValue={submenuSelected}
+						items={submenu}
+						dispatch={dispatch}
+						isComparison={false}
+					/>
+				</>
+			)}
 		</Col>
 	);
 };

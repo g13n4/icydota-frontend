@@ -7,13 +7,12 @@ const { Title } = Typography;
 const PerformanceSubmenuName = () => {
 	const { darkTheme, categoriesDict } = useSelector((state) => state.menu);
 
-	const { menuSelected, submenuSelected, submenuComparisonSelected } =
+	const { isComparison, submenuSelected, submenuComparisonSelected } =
 		useSelector((state) => state.menuSelected);
 
-	const submenuText =
-		menuSelected === "data"
-			? categoriesDict[submenuSelected]
-			: categoriesDict[submenuComparisonSelected];
+	const submenuText = isComparison
+		? categoriesDict[submenuComparisonSelected]
+		: categoriesDict[submenuSelected];
 
 	return (
 		<Title
