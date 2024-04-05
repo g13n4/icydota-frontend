@@ -52,37 +52,12 @@ const getTargetColor = (colours, value, min, max) => {
 	return colours[colourIndex];
 };
 
-const resize = (size, minValue, coef) => {
-	return Math.floor(size * coef);
-};
-
 const DataTable = ({ tableData }) => {
 	const { menuSelected } = useSelector((state) => state.menuSelected);
 
 	const { darkTheme } = useSelector((state) => state.menu);
 
 	const colours = getColours(darkTheme);
-
-	const [windowSize, setWindowSize] = useState({
-		width: resize(window.innerWidth, 640, 0.85),
-		height: resize(window.innerHeight, 480, 0.7),
-	});
-
-	// make canvas resize automatically
-	useEffect(() => {
-		const handleWindowResize = () => {
-			setWindowSize({
-				width: resize(window.innerWidth, 640, 0.85),
-				height: resize(window.innerHeight, 480, 0.7),
-			});
-		};
-
-		window.addEventListener("resize", handleWindowResize);
-
-		return () => {
-			window.removeEventListener("resize", handleWindowResize);
-		};
-	}, []);
 
 	const tableOptions = {
 		interaction: {
@@ -114,25 +89,21 @@ const DataTable = ({ tableData }) => {
 	};
 
 	return (
-		tableData.table_data &&
-		windowSize.width &&
-		windowSize.height && (
-			<SheetComponent
-				dataCfg={tableData.table_data}
-				options={{
-					...tableOptions,
-				}}
-				adaptive={{
-					width: true,
-					height: false,
-					getContainer: () => document.getElementById("container"),
-				}}
-				sheetType="pivot"
-				themeCfg={{
-					name: darkTheme ? "dark" : "colorful",
-				}}
-			/>
-		)
+		<SheetComponent
+			dataCfg={tableData.table_data}
+			options={{
+				...tableOptions,
+			}}
+			adaptive={{
+				width: true,
+				height: false,
+				getContainer: () => document.getElementById("dota-data-table"),
+			}}
+			sheetType="pivot"
+			themeCfg={{
+				name: darkTheme ? "dark" : "colorful",
+			}}
+		/>
 	);
 };
 

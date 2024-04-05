@@ -29,8 +29,6 @@ const DataContent = () => {
 	const menuDataDefaut = { loading: true };
 	const [menuData, setMenuData] = useState(menuDataDefaut);
 
-	const ref = useRef(null);
-
 	const {
 		menuSelected,
 		leagueMenuSelected,
@@ -114,12 +112,12 @@ const DataContent = () => {
 	return (
 		isLoaded && (
 			<Content
+				id="dota-data-table"
 				style={{
 					margin: "5px 16px 0",
 					padding: "0 1% 2% 1%",
 					minHeight: "75vh",
 				}}
-				ref={ref}
 			>
 				<Flex vertical={true} gap={"middle"}>
 					<DataSelector />
@@ -130,7 +128,7 @@ const DataContent = () => {
 								loading={menuData.loading}
 							/>
 						) : (
-							menuData && <DataTable tableData={menuData} parentRef={ref} />
+							menuData && <DataTable tableData={menuData} />
 						)
 					) : (
 						<DataTableState darkTheme={darkTheme} loading={false} />
