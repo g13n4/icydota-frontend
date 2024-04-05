@@ -13,10 +13,9 @@ export default defineConfig({
 			output: {
 				manualChunks: {
 					antd: ["antd"],
-					react: ["react"],
-					redux: ["redux"],
-					lodash: ["lodash"],
-					axios: ["axios"],
+					antv: ["@antv/s2"],
+					antvreact: ["@antv/s2-react"],
+					other: ["axios", "lodash", "redux", "react"],
 				},
 			},
 		},

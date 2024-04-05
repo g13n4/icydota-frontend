@@ -5,6 +5,7 @@ import GameStageRadio from "../Reusable/GameStageRadio";
 import FlatPercentRadio from "../Reusable/FlatPercentRadio";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSettings } from "../../actions/settings";
+import "../styles/SettingButtons.css";
 
 const getAggregationRadioData = () => {
 	return [
@@ -35,6 +36,7 @@ const DataSelectorAgg = () => {
 	return (
 		<Flex className="data-selector">
 			<Radio.Group
+				className="aggregation-radio settings-radio"
 				options={aggregationRadioData}
 				onChange={(e) => {
 					dispatch(updateSettings("aggregation_type", e.target.value));

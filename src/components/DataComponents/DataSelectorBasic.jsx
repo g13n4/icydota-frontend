@@ -5,6 +5,7 @@ import ComparisonRadio from "../Reusable/ComparisonRadio";
 import GameStageRadio from "../Reusable/GameStageRadio";
 import { useDispatch, useSelector } from "react-redux";
 import { setLeagueGameSelectedAction } from "../../store/menuSelectedReducer";
+import "../styles/SettingButtons.css";
 
 const DataSelectorBasic = () => {
 	const dispatch = useDispatch();

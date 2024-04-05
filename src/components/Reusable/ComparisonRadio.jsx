@@ -28,6 +28,7 @@ const ComparisonRadio = () => {
 		<Flex gap={"large"}>
 			<FlatPercentRadio />
 			<Radio.Group
+				className="comparison-radio settings-radio"
 				options={comparisonRadioData}
 				onChange={(e) => {
 					dispatch(updateSettings("comparison", e.target.value));

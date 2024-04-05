@@ -28,6 +28,7 @@ const GameStageRadio = () => {
 
 	return (
 		<Radio.Group
+			className="game-stage-radio settings-radio"
 			options={gameStageData}
 			onChange={(e) => {
 				dispatch(updateSettings("game_stage", e.target.value));

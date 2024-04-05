@@ -23,7 +23,7 @@ const DataTableState = ({ darkTheme, loading }) => {
 			}}
 		>
 			{loading ? (
-				<Spin tip="Loading" size="large">
+				<Spin size="large">
 					<div className="content" />
 				</Spin>
 			) : (

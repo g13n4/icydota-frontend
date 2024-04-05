@@ -7,7 +7,7 @@ import "./../styles/PerformanceMenu.css";
 const MenuSelected = ({ defaultValue, items, dispatch, isComparison }) => {
 	return (
 		<Menu
-			defaultSelectedKeys={[defaultValue]}
+			selectedKeys={[defaultValue]}
 			mode={"vertical"}
 			theme={"light"}
 			items={items}
@@ -53,9 +53,8 @@ const PerformanceMenu = () => {
 				<Menu
 					style={{ textAlign: "center" }}
 					className="performance-menu"
-					defaultSelectedKeys={[menuSelected]}
+					selectedKeys={[menuSelected]}
 					mode={"vertical"}
-					theme={"light"}
 					items={menu}
 					onClick={(item) => dispatch(setSelected("menu", item.key))}
 				/>

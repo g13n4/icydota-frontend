@@ -4,6 +4,7 @@ import "./../styles/DataSelector.css";
 import FlatPercentRadio from "../Reusable/FlatPercentRadio";
 import { updateSettings } from "../../actions/settings";
 import { useDispatch, useSelector } from "react-redux";
+import "../styles/SettingButtons.css";
 
 const getAggregationRadioData = () => {
 	return [
@@ -80,6 +81,7 @@ const DataSelectorCross = () => {
 			)}
 			<FlatPercentRadio />
 			<Radio.Group
+				className="cross-aggregation-radio settings-radio"
 				options={aggregationRadioData}
 				onChange={(e) => {
 					dispatch(updateSettings("ccomp_type", e.target.value));
@@ -89,6 +91,7 @@ const DataSelectorCross = () => {
 				buttonStyle="solid"
 			/>
 			<Radio.Group
+				className="position-radio settings-radio"
 				options={positionRadioData}
 				onChange={(e) => {
 					dispatch(updateSettings("ccomp_position", e.target.value));

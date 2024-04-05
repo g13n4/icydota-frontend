@@ -24,6 +24,7 @@ const FlatPercentRadio = () => {
 
 	return (
 		<Radio.Group
+			className="flat-radio settings-radio"
 			options={flatRadioData}
 			onChange={(e) => {
 				dispatch(updateSettings("flat", e.target.value === "flat"));
