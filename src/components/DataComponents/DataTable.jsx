@@ -52,7 +52,7 @@ const getTargetColor = (colours, value, min, max) => {
 	return colours[colourIndex];
 };
 
-const DataTable = ({ tableData, dcRef }) => {
+const DataTable = ({ tableData }) => {
 	const { menuSelected } = useSelector((state) => state.menuSelected);
 
 	const { darkTheme } = useSelector((state) => state.menu);
@@ -97,7 +97,7 @@ const DataTable = ({ tableData, dcRef }) => {
 			adaptive={{
 				width: true,
 				height: false,
-				getContainer: () => dcRef,
+				getContainer: () => document.getElementById("dota-data-table"),
 			}}
 			sheetType="pivot"
 			themeCfg={{

@@ -27,7 +27,6 @@ const getDataSelector = (isData, isAggregation, isCross) => {
 const DataContent = () => {
 	const menuDataDefaut = { loading: true };
 	const [menuData, setMenuData] = useState(menuDataDefaut);
-	const dcRef = useRef(null);
 
 	const {
 		menuSelected,
@@ -112,7 +111,6 @@ const DataContent = () => {
 	return (
 		isLoaded && (
 			<Content
-				ref={dcRef}
 				id="dota-data-table"
 				style={{
 					margin: "5px 16px 0",
@@ -129,7 +127,7 @@ const DataContent = () => {
 								loading={menuData.loading}
 							/>
 						) : (
-							menuData && <DataTable tableData={menuData} dcRef={dcRef} />
+							menuData && <DataTable tableData={menuData} />
 						)
 					) : (
 						<DataTableState darkTheme={darkTheme} loading={false} />
