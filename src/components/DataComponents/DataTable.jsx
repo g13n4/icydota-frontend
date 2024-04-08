@@ -60,6 +60,7 @@ const DataTable = ({ tableData }) => {
 	const colours = getColours(darkTheme);
 
 	const tableOptions = {
+		width: 200,
 		interaction: {
 			selectedCellsSpotlight: false,
 			hoverHighlight: menuSelected === "cross_comparison" ? true : false,
