@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import DataTable from "./DataTable";
-import { Layout, Flex, Typography } from "antd";
+import { Layout, Flex } from "antd";
 const { useState, useEffect } = React;
 import DataSelectorAgg from "./DataSelectorAgg";
 import DataSelectorBasic from "./DataSelectorBasic";
@@ -10,7 +10,6 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import DataTableState from "./DataTableState";
 
-const { Title } = Typography;
 const { Content } = Layout;
 
 const getDataSelector = (isData, isAggregation, isCross) => {
@@ -28,6 +27,7 @@ const getDataSelector = (isData, isAggregation, isCross) => {
 const DataContent = () => {
 	const menuDataDefaut = { loading: true };
 	const [menuData, setMenuData] = useState(menuDataDefaut);
+	const dcRef = useRef(null);
 
 	const {
 		menuSelected,
@@ -112,6 +112,7 @@ const DataContent = () => {
 	return (
 		isLoaded && (
 			<Content
+				ref={dcRef}
 				id="dota-data-table"
 				style={{
 					margin: "5px 16px 0",
@@ -128,7 +129,7 @@ const DataContent = () => {
 								loading={menuData.loading}
 							/>
 						) : (
-							menuData && <DataTable tableData={menuData} />
+							menuData && <DataTable tableData={menuData} dcRef={dcRef} />
 						)
 					) : (
 						<DataTableState darkTheme={darkTheme} loading={false} />
