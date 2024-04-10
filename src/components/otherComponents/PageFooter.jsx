@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Layout, Flex, Typography } from "antd";
+import "../styles/PseudoAnt.css";
 
 const { Footer } = Layout;
 
@@ -19,20 +20,17 @@ const PageFooter = () => {
 		(state) => state.menu,
 	);
 
+	const footerTheme = darkTheme
+		? "pant-dark pant-colours-dark"
+		: "pant-light pant-colours-light";
+	console.log(footerTheme);
+
 	return (
 		<Footer
-			className={"ant-menu ant-menu-root"}
+			className={`on-bottom ${footerTheme}`}
 			style={{
-				backgroundColor: darkTheme ? "#141414" : "#ffffff",
-				borderColor: darkTheme
-					? "rgba(253, 253, 253, 0.12)"
-					: "rgba(5, 5, 5, 0.06)",
-				borderWidth: "1px",
-				borderLeftWidth: "0px",
-				borderRightWidth: "0px",
-				borderBottomWidth: "0px",
-				borderStyle: "solid",
-				margin: "1.5em 0 0 0",
+				margin: "1em 0 0 0",
+				padding: "2em",
 			}}
 		>
 			<Flex

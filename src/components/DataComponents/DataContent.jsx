@@ -2,27 +2,13 @@ import React from "react";
 import DataTable from "./DataTable";
 import { Layout, Flex } from "antd";
 const { useState, useEffect } = React;
-import DataSelectorAgg from "./DataSelectorAgg";
-import DataSelectorBasic from "./DataSelectorBasic";
-import DataSelectorCross from "./DataSelectorCross";
+import DataSelector from "./DataSelector";
 import getTableData from "./../../utils/getTableData";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import DataTableState from "./DataTableState";
 
 const { Content } = Layout;
-
-const getDataSelector = (isData, isAggregation, isCross) => {
-	if (isData) {
-		return DataSelectorBasic;
-	}
-	if (isAggregation) {
-		return DataSelectorAgg;
-	}
-	if (isCross) {
-		return DataSelectorCross;
-	}
-};
 
 const DataContent = () => {
 	const menuDataDefaut = { loading: true };
@@ -57,7 +43,6 @@ const DataContent = () => {
 		flat,
 	} = useSelector((state) => state.settings);
 
-	const DataSelector = getDataSelector(isData, isAggregation, isCross);
 	useEffect(() => {
 		if (isLoaded) {
 			setMenuData(menuDataDefaut);
@@ -119,7 +104,11 @@ const DataContent = () => {
 				}}
 			>
 				<Flex vertical={true} gap={"middle"}>
-					<DataSelector />
+					<DataSelector
+						isData={isData}
+						isAggregation={isAggregation}
+						isCross={isCross}
+					/>
 					{!(menuData instanceof Error) ? (
 						menuData.loading ? (
 							<DataTableState

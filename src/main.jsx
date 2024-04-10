@@ -18,7 +18,10 @@ if (window?.matchMedia("(prefers-color-scheme: dark)").matches) {
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<ConfigProvider locale={en_US} theme={{ algorithm: themeData }}>
+			<ConfigProvider
+				locale={en_US}
+				theme={{ algorithm: themeData, cssVar: true, hashed: false }}
+			>
 				<MainPage />
 			</ConfigProvider>
 		</Provider>

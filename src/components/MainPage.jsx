@@ -8,8 +8,6 @@ import DataContent from "./DataComponents/DataContent";
 import PerformanceSubmenuName from "./DataComponents/PerformanceSubmenuName";
 import "./styles/MainPage.css";
 
-const { Content, Footer } = Layout;
-
 const MainPage = () => {
 	return (
 		<div className="background-page">

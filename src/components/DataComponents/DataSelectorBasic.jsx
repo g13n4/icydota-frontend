@@ -19,7 +19,7 @@ const DataSelectorBasic = () => {
 	);
 
 	return (
-		<Flex className="data-selector">
+		<>
 			{leagueGamesDefault.length > 0 && (
 				<Cascader
 					defaultValue={[leagueGameSelected]}
@@ -31,7 +31,7 @@ const DataSelectorBasic = () => {
 			)}
 			{submenuSelected !== "total" && <GameStageRadio />}
 			{isComparison && <ComparisonRadio />}
-		</Flex>
+		</>
 	);
 };
 

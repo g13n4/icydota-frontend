@@ -34,7 +34,7 @@ const DataSelectorAgg = () => {
 	const { aggregationType } = useSelector((state) => state.settings);
 
 	return (
-		<Flex className="data-selector">
+		<>
 			<Radio.Group
 				className="aggregation-radio settings-radio"
 				options={aggregationRadioData}
@@ -47,7 +47,7 @@ const DataSelectorAgg = () => {
 			/>
 			{submenuSelected !== "total" && <GameStageRadio />}
 			{isComparison && <FlatPercentRadio />}
-		</Flex>
+		</>
 	);
 };
 

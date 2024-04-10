@@ -55,7 +55,7 @@ const DataSelectorCross = () => {
 	const isTotal = submenuComparisonSelected === "total";
 
 	return (
-		<Flex className="data-selector">
+		<>
 			{isTotal ? (
 				<Cascader
 					className="cascade-total"
@@ -100,7 +100,7 @@ const DataSelectorCross = () => {
 				optionType="button"
 				buttonStyle="solid"
 			/>
-		</Flex>
+		</>
 	);
 };
 

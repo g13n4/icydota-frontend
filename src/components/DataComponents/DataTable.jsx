@@ -9,31 +9,31 @@ import "@antv/s2/dist/style.min.css"; // used to create tooltips
 const getColours = (isDarkTheme) => {
 	if (isDarkTheme) {
 		return [
-			"#e27c7c",
-			"#a86464",
-			"#6d4b4b",
-			"#503f3f",
-			"#333333",
-			"#3c4e4b",
-			"#456661",
-			"#466964",
-			"#599e94",
-			"#6cd4c5",
+			"rgba(226, 124, 124, 0.75)",
+			"rgba(168, 100, 100, 0.75)",
+			"rgba(109, 75, 75, 0.75)",
+			"rgba(80, 63, 63, 0.75)",
+			"rgba(51, 51, 51, 0.75)",
+			"rgba(60, 78, 75, 0.75)",
+			"rgba(69, 102, 97, 0.75)",
+			"rgba(70, 105, 100, 0.75)",
+			"rgba(89, 158, 148, 0.75)",
+			"rgba(108, 212, 197, 0.75)",
 		];
 	}
 
 	return [
-		"#115f9a",
-		"#1984c5",
-		"#22a7f0",
-		"#48b5c4",
-		"#76c68f",
-		"#a6d75b",
-		"#c9e52f",
-		"#f4f100",
-		"#e1a692",
-		"#de6e56",
-		"#c23728",
+		"rgba(17, 95, 154, 0.75)",
+		"rgba(25, 132, 197, 0.75)",
+		"rgba(34, 167, 240, 0.75)",
+		"rgba(72, 181, 196, 0.75)",
+		"rgba(118, 198, 143, 0.75)",
+		"rgba(166, 215, 91, 0.75)",
+		"rgba(201, 229, 47, 0.75)",
+		"rgba(244, 241, 0, 0.75)",
+		"rgba(225, 166, 146, 0.75)",
+		"rgba(222, 110, 86, 0.75)",
+		"rgba(194, 55, 40, 0.75)",
 	];
 };
 
@@ -60,7 +60,7 @@ const DataTable = ({ tableData }) => {
 	const colours = getColours(darkTheme);
 
 	const tableOptions = {
-		width: 280,
+		width: 150,
 		interaction: {
 			selectedCellsSpotlight: false,
 			hoverHighlight: menuSelected === "cross_comparison" ? true : false,

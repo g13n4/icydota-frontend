@@ -1,7 +1,10 @@
 .data-selector {
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     row-gap: "1em";
     height: "2em";
+    flex-wrap: nowrap;
+
 }
