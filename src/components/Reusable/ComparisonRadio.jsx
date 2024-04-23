@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Radio } from "antd";
+import { div, Radio } from "antd";
 import FlatPercentRadio from "./FlatPercentRadio";
 import { updateSettings } from "../../actions/settings";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,7 +25,7 @@ const ComparisonRadio = () => {
 	const comparisonRadioData = getComparisonRadioData();
 
 	return (
-		<Flex gap={"large"}>
+		<div gap={"large"}>
 			<FlatPercentRadio />
 			<Radio.Group
 				className="comparison-radio settings-radio"
@@ -37,7 +37,7 @@ const ComparisonRadio = () => {
 				optionType="button"
 				buttonStyle="solid"
 			/>
-		</Flex>
+		</div>
 	);
 };
 

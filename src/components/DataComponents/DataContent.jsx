@@ -1,16 +1,20 @@
 import React from "react";
-import DataTable from "./DataTable";
-import { Layout, Flex } from "antd";
+//import DataTable from "./DataTable";
 const { useState, useEffect } = React;
-import DataSelector from "./DataSelector";
+//import DataSelector from "./DataSelector";
 import getTableData from "./../../utils/getTableData";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import DataTableState from "./DataTableState";
-
-const { Content } = Layout;
+import { useParams as useRouterParams } from "react-router-dom";
 
 const DataContent = () => {
+	const {
+		routeSelectedLeague,
+		mode = "data",
+		category = "total",
+	} = useRouterParams();
+
 	const menuDataDefaut = { loading: true };
 	const [menuData, setMenuData] = useState(menuDataDefaut);
 
@@ -95,34 +99,23 @@ const DataContent = () => {
 
 	return (
 		isLoaded && (
-			<Content
-				id="dota-data-table"
-				style={{
-					margin: "5px 16px 0",
-					padding: "0 1% 2% 1%",
-					minHeight: "75vh",
-				}}
-			>
-				<Flex vertical={true} gap={"middle"}>
-					<DataSelector
-						isData={isData}
-						isAggregation={isAggregation}
-						isCross={isCross}
-					/>
-					{!(menuData instanceof Error) ? (
-						menuData.loading ? (
-							<DataTableState
-								darkTheme={darkTheme}
-								loading={menuData.loading}
-							/>
-						) : (
-							menuData && <DataTable tableData={menuData} />
-						)
+			<div>
+				{/* <DataSelector
+					isData={isData}
+					isAggregation={isAggregation}
+					isCross={isCross}
+				/> */}
+				{!(menuData instanceof Error) ? (
+					menuData.loading ? (
+						<DataTableState darkTheme={darkTheme} loading={menuData.loading} />
 					) : (
-						<DataTableState darkTheme={darkTheme} loading={false} />
-					)}
-				</Flex>
-			</Content>
+						<h1>{menuData}</h1>
+						//menuData && <DataTable tableData={menuData} />
+					)
+				) : (
+					<DataTableState darkTheme={darkTheme} loading={false} />
+				)}
+			</div>
 		)
 	);
 };

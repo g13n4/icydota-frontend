@@ -1,5 +1,4 @@
 import React from "react";
-import { Radio } from "antd";
 import { updateSettings } from "../../actions/settings";
 import { useDispatch, useSelector } from "react-redux";
 

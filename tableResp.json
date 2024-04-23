@@ -1,0 +1,698 @@
+{
+    "table_data": {
+        "fields": {
+            "rows": [
+                "player"
+            ],
+            "columns": [],
+            "values": [
+                "position",
+                "hero",
+                "kills_per_min",
+                "total_gold",
+                "observer_kills",
+                "sentry_kills",
+                "total_xp",
+                "hero_kills",
+                "kda",
+                "lane_kills",
+                "neutral_kills",
+                "ancient_kills",
+                "tower_kills",
+                "roshan_kills",
+                "courier_kills",
+                "observer_uses",
+                "sentry_uses",
+                "runes_picked_up",
+                "buyback_count",
+                "lane_efficiency",
+                "lane_efficiency_pct",
+                "first_blood_claimed",
+                "first_kill_time",
+                "died_first",
+                "first_death_time",
+                "lost_tower_first",
+                "lost_tower_time",
+                "lost_tower_lane",
+                "destroyed_tower_first",
+                "destroyed_tower_time",
+                "destroyed_tower_lane"
+            ],
+            "valueInCols": true
+        },
+        "meta": [
+            {
+                "field": "position",
+                "name": "Position"
+            },
+            {
+                "field": "hero",
+                "name": "Hero"
+            },
+            {
+                "field": "player",
+                "name": "Player"
+            },
+            {
+                "field": "kills_per_min",
+                "name": "Kills per min"
+            },
+            {
+                "field": "total_gold",
+                "name": "Total gold"
+            },
+            {
+                "field": "lane_kills",
+                "name": "Lane kills"
+            },
+            {
+                "field": "observer_uses",
+                "name": "Observer uses"
+            },
+            {
+                "field": "lost_tower_first",
+                "name": "Lost tower first"
+            },
+            {
+                "field": "total_xp",
+                "name": "Total xp"
+            },
+            {
+                "field": "hero_kills",
+                "name": "Hero kills"
+            },
+            {
+                "field": "sentry_uses",
+                "name": "Sentry uses"
+            },
+            {
+                "field": "lost_tower_lane",
+                "name": "Lost tower lane"
+            },
+            {
+                "field": "observer_kills",
+                "name": "Observer kills"
+            },
+            {
+                "field": "lane_efficiency",
+                "name": "Lane efficiency"
+            },
+            {
+                "field": "lost_tower_time",
+                "name": "Lost tower time"
+            },
+            {
+                "field": "sentry_kills",
+                "name": "Sentry kills"
+            },
+            {
+                "field": "lane_efficiency_pct",
+                "name": "Lane efficiency pct"
+            },
+            {
+                "field": "destroyed_tower_first",
+                "name": "Destroyed tower first"
+            },
+            {
+                "field": "roshan_kills",
+                "name": "Roshan kills"
+            },
+            {
+                "field": "first_blood_claimed",
+                "name": "First blood claimed"
+            },
+            {
+                "field": "destroyed_tower_lane",
+                "name": "Destroyed tower lane"
+            },
+            {
+                "field": "neutral_kills",
+                "name": "Neutral kills"
+            },
+            {
+                "field": "runes_picked_up",
+                "name": "Runes picked up"
+            },
+            {
+                "field": "first_kill_time",
+                "name": "First kill time"
+            },
+            {
+                "field": "destroyed_tower_time",
+                "name": "Destroyed tower time"
+            },
+            {
+                "field": "tower_kills",
+                "name": "Tower kills"
+            },
+            {
+                "field": "ancient_kills",
+                "name": "Ancient kills"
+            },
+            {
+                "field": "died_first",
+                "name": "Died first"
+            },
+            {
+                "field": "kda",
+                "name": "Kda"
+            },
+            {
+                "field": "courier_kills",
+                "name": "Courier kills"
+            },
+            {
+                "field": "buyback_count",
+                "name": "Buyback count"
+            },
+            {
+                "field": "first_death_time",
+                "name": "First death time"
+            }
+        ],
+        "data": [
+            {
+                "position": "carry",
+                "hero": "Alchemist",
+                "player": "Kiritych~",
+                "kills_per_min": 0.15,
+                "total_gold": 39358,
+                "lane_kills": 209,
+                "observer_uses": 0,
+                "lost_tower_first": 100,
+                "total_xp": 38017,
+                "hero_kills": 7,
+                "sentry_uses": 0,
+                "lost_tower_lane": 1,
+                "observer_kills": 1,
+                "lane_efficiency": 1.11,
+                "lost_tower_time": 545,
+                "sentry_kills": 0,
+                "lane_efficiency_pct": 110,
+                "destroyed_tower_first": 0,
+                "roshan_kills": 2,
+                "first_blood_claimed": 0,
+                "destroyed_tower_lane": null,
+                "neutral_kills": 239,
+                "runes_picked_up": 8,
+                "first_kill_time": null,
+                "destroyed_tower_time": null,
+                "tower_kills": 4,
+                "ancient_kills": 35,
+                "died_first": 0,
+                "kda": 4.2,
+                "courier_kills": 0,
+                "buyback_count": 0,
+                "first_death_time": null
+            },
+            {
+                "position": "soft support",
+                "hero": "Tusk",
+                "player": "sayuw",
+                "kills_per_min": 0,
+                "total_gold": 12580,
+                "lane_kills": 37,
+                "observer_uses": 6,
+                "lost_tower_first": 0,
+                "total_xp": 21645,
+                "hero_kills": 0,
+                "sentry_uses": 3,
+                "lost_tower_lane": null,
+                "observer_kills": 1,
+                "lane_efficiency": 0.38,
+                "lost_tower_time": null,
+                "sentry_kills": 1,
+                "lane_efficiency_pct": 37,
+                "destroyed_tower_first": 0,
+                "roshan_kills": 0,
+                "first_blood_claimed": 0,
+                "destroyed_tower_lane": null,
+                "neutral_kills": 16,
+                "runes_picked_up": 6,
+                "first_kill_time": null,
+                "destroyed_tower_time": null,
+                "tower_kills": 0,
+                "ancient_kills": 0,
+                "died_first": 0,
+                "kda": 2.5,
+                "courier_kills": 0,
+                "buyback_count": 1,
+                "first_death_time": null
+            },
+            {
+                "position": "hard support",
+                "hero": "Disruptor",
+                "player": "Fng",
+                "kills_per_min": 0.04,
+                "total_gold": 14568,
+                "lane_kills": 43,
+                "observer_uses": 5,
+                "lost_tower_first": 100,
+                "total_xp": 22523,
+                "hero_kills": 2,
+                "sentry_uses": 6,
+                "lost_tower_lane": 1,
+                "observer_kills": 1,
+                "lane_efficiency": 0.41,
+                "lost_tower_time": 545,
+                "sentry_kills": 5,
+                "lane_efficiency_pct": 40,
+                "destroyed_tower_first": 0,
+                "roshan_kills": 0,
+                "first_blood_claimed": 0,
+                "destroyed_tower_lane": null,
+                "neutral_kills": 54,
+                "runes_picked_up": 4,
+                "first_kill_time": null,
+                "destroyed_tower_time": null,
+                "tower_kills": 0,
+                "ancient_kills": 1,
+                "died_first": 100,
+                "kda": 2.09,
+                "courier_kills": 0,
+                "buyback_count": 0,
+                "first_death_time": 23
+            },
+            {
+                "position": "mid",
+                "hero": "Windranger",
+                "player": "squad1x",
+                "kills_per_min": 0.32,
+                "total_gold": 32097,
+                "lane_kills": 264,
+                "observer_uses": 2,
+                "lost_tower_first": 0,
+                "total_xp": 39081,
+                "hero_kills": 15,
+                "sentry_uses": 0,
+                "lost_tower_lane": null,
+                "observer_kills": 1,
+                "lane_efficiency": 0.83,
+                "lost_tower_time": null,
+                "sentry_kills": 0,
+                "lane_efficiency_pct": 83,
+                "destroyed_tower_first": 0,
+                "roshan_kills": 1,
+                "first_blood_claimed": 0,
+                "destroyed_tower_lane": null,
+                "neutral_kills": 148,
+                "runes_picked_up": 12,
+                "first_kill_time": null,
+                "destroyed_tower_time": null,
+                "tower_kills": 2,
+                "ancient_kills": 9,
+                "died_first": 0,
+                "kda": 4.6,
+                "courier_kills": 0,
+                "buyback_count": 0,
+                "first_death_time": null
+            },
+            {
+                "position": "offlane",
+                "hero": "Dawnbreaker",
+                "player": "Noticed",
+                "kills_per_min": 0.13,
+                "total_gold": 26686,
+                "lane_kills": 186,
+                "observer_uses": 0,
+                "lost_tower_first": 0,
+                "total_xp": 37693,
+                "hero_kills": 6,
+                "sentry_uses": 1,
+                "lost_tower_lane": null,
+                "observer_kills": 0,
+                "lane_efficiency": 0.88,
+                "lost_tower_time": null,
+                "sentry_kills": 0,
+                "lane_efficiency_pct": 88,
+                "destroyed_tower_first": 0,
+                "roshan_kills": 0,
+                "first_blood_claimed": 0,
+                "destroyed_tower_lane": null,
+                "neutral_kills": 161,
+                "runes_picked_up": 7,
+                "first_kill_time": null,
+                "destroyed_tower_time": null,
+                "tower_kills": 0,
+                "ancient_kills": 73,
+                "died_first": 0,
+                "kda": 1.9,
+                "courier_kills": 0,
+                "buyback_count": 1,
+                "first_death_time": null
+            },
+            {
+                "position": "hard support",
+                "hero": "Elder Titan",
+                "player": "Puppey",
+                "kills_per_min": 0.04,
+                "total_gold": 17205,
+                "lane_kills": 67,
+                "observer_uses": 1,
+                "lost_tower_first": 0,
+                "total_xp": 27935,
+                "hero_kills": 2,
+                "sentry_uses": 8,
+                "lost_tower_lane": null,
+                "observer_kills": 3,
+                "lane_efficiency": 0.39,
+                "lost_tower_time": null,
+                "sentry_kills": 6,
+                "lane_efficiency_pct": 39,
+                "destroyed_tower_first": 0,
+                "roshan_kills": 0,
+                "first_blood_claimed": 0,
+                "destroyed_tower_lane": null,
+                "neutral_kills": 19,
+                "runes_picked_up": 11,
+                "first_kill_time": null,
+                "destroyed_tower_time": null,
+                "tower_kills": 2,
+                "ancient_kills": 2,
+                "died_first": 0,
+                "kda": 4.17,
+                "courier_kills": 1,
+                "buyback_count": 0,
+                "first_death_time": null
+            },
+            {
+                "position": "mid",
+                "hero": "Leshrac",
+                "player": "Kordan",
+                "kills_per_min": 0.22,
+                "total_gold": 28998,
+                "lane_kills": 236,
+                "observer_uses": 1,
+                "lost_tower_first": 0,
+                "total_xp": 36861,
+                "hero_kills": 10,
+                "sentry_uses": 1,
+                "lost_tower_lane": null,
+                "observer_kills": 0,
+                "lane_efficiency": 0.99,
+                "lost_tower_time": null,
+                "sentry_kills": 0,
+                "lane_efficiency_pct": 98,
+                "destroyed_tower_first": 0,
+                "roshan_kills": 0,
+                "first_blood_claimed": 0,
+                "destroyed_tower_lane": null,
+                "neutral_kills": 129,
+                "runes_picked_up": 9,
+                "first_kill_time": null,
+                "destroyed_tower_time": null,
+                "tower_kills": 2,
+                "ancient_kills": 16,
+                "died_first": 0,
+                "kda": 3,
+                "courier_kills": 0,
+                "buyback_count": 0,
+                "first_death_time": null
+            },
+            {
+                "position": "carry",
+                "hero": "Lifestealer",
+                "player": "Crystallis",
+                "kills_per_min": 0.22,
+                "total_gold": 28998,
+                "lane_kills": 157,
+                "observer_uses": 0,
+                "lost_tower_first": 0,
+                "total_xp": 38896,
+                "hero_kills": 10,
+                "sentry_uses": 0,
+                "lost_tower_lane": null,
+                "observer_kills": 0,
+                "lane_efficiency": 0.7,
+                "lost_tower_time": null,
+                "sentry_kills": 0,
+                "lane_efficiency_pct": 70,
+                "destroyed_tower_first": 0,
+                "roshan_kills": 0,
+                "first_blood_claimed": 0,
+                "destroyed_tower_lane": null,
+                "neutral_kills": 202,
+                "runes_picked_up": 2,
+                "first_kill_time": null,
+                "destroyed_tower_time": null,
+                "tower_kills": 1,
+                "ancient_kills": 23,
+                "died_first": 0,
+                "kda": 4.2,
+                "courier_kills": 0,
+                "buyback_count": 0,
+                "first_death_time": null
+            },
+            {
+                "position": "offlane",
+                "hero": "Beastmaster",
+                "player": "BOOM",
+                "kills_per_min": 0.15,
+                "total_gold": 30987,
+                "lane_kills": 220,
+                "observer_uses": 0,
+                "lost_tower_first": 0,
+                "total_xp": 35520,
+                "hero_kills": 8,
+                "sentry_uses": 0,
+                "lost_tower_lane": null,
+                "observer_kills": 1,
+                "lane_efficiency": 0.82,
+                "lost_tower_time": null,
+                "sentry_kills": 0,
+                "lane_efficiency_pct": 81,
+                "destroyed_tower_first": 100,
+                "roshan_kills": 0,
+                "first_blood_claimed": 0,
+                "destroyed_tower_lane": 1,
+                "neutral_kills": 144,
+                "runes_picked_up": 7,
+                "first_kill_time": null,
+                "destroyed_tower_time": 545,
+                "tower_kills": 2,
+                "ancient_kills": 49,
+                "died_first": 0,
+                "kda": 7,
+                "courier_kills": 0,
+                "buyback_count": 0,
+                "first_death_time": null
+            },
+            {
+                "position": "soft support",
+                "hero": "Batrider",
+                "player": "- ah fu -",
+                "kills_per_min": 0.11,
+                "total_gold": 16927,
+                "lane_kills": 64,
+                "observer_uses": 3,
+                "lost_tower_first": 0,
+                "total_xp": 25391,
+                "hero_kills": 5,
+                "sentry_uses": 10,
+                "lost_tower_lane": null,
+                "observer_kills": 1,
+                "lane_efficiency": 0.59,
+                "lost_tower_time": null,
+                "sentry_kills": 1,
+                "lane_efficiency_pct": 59,
+                "destroyed_tower_first": 100,
+                "roshan_kills": 0,
+                "first_blood_claimed": 100,
+                "destroyed_tower_lane": 1,
+                "neutral_kills": 58,
+                "runes_picked_up": 8,
+                "first_kill_time": 23,
+                "destroyed_tower_time": 545,
+                "tower_kills": 0,
+                "ancient_kills": 1,
+                "died_first": 0,
+                "kda": 2.09,
+                "courier_kills": 1,
+                "buyback_count": 0,
+                "first_death_time": null
+            }
+        ]
+    },
+    "table_options": {
+        "style": {
+            "layoutWidthType": "colAdaptive"
+        }
+    },
+    "table_values": [
+        {
+            "max": 0.32,
+            "min": 0,
+            "diff": 0.32,
+            "col": "kills_per_min"
+        },
+        {
+            "max": 39358,
+            "min": 12580,
+            "diff": 26778,
+            "col": "total_gold"
+        },
+        {
+            "max": 264,
+            "min": 37,
+            "diff": 227,
+            "col": "lane_kills"
+        },
+        {
+            "max": 6,
+            "min": 0,
+            "diff": 6,
+            "col": "observer_uses"
+        },
+        {
+            "max": 100,
+            "min": 0,
+            "diff": 100,
+            "col": "lost_tower_first"
+        },
+        {
+            "max": 39081,
+            "min": 21645,
+            "diff": 17436,
+            "col": "total_xp"
+        },
+        {
+            "max": 15,
+            "min": 0,
+            "diff": 15,
+            "col": "hero_kills"
+        },
+        {
+            "max": 10,
+            "min": 0,
+            "diff": 10,
+            "col": "sentry_uses"
+        },
+        {
+            "max": 1,
+            "min": 1,
+            "diff": 0,
+            "col": "lost_tower_lane"
+        },
+        {
+            "max": 3,
+            "min": 0,
+            "diff": 3,
+            "col": "observer_kills"
+        },
+        {
+            "max": 1.11,
+            "min": 0.38,
+            "diff": 0.73,
+            "col": "lane_efficiency"
+        },
+        {
+            "max": 545,
+            "min": 545,
+            "diff": 0,
+            "col": "lost_tower_time"
+        },
+        {
+            "max": 6,
+            "min": 0,
+            "diff": 6,
+            "col": "sentry_kills"
+        },
+        {
+            "max": 110,
+            "min": 37,
+            "diff": 73,
+            "col": "lane_efficiency_pct"
+        },
+        {
+            "max": 100,
+            "min": 0,
+            "diff": 100,
+            "col": "destroyed_tower_first"
+        },
+        {
+            "max": 2,
+            "min": 0,
+            "diff": 2,
+            "col": "roshan_kills"
+        },
+        {
+            "max": 100,
+            "min": 0,
+            "diff": 100,
+            "col": "first_blood_claimed"
+        },
+        {
+            "max": 239,
+            "min": 16,
+            "diff": 223,
+            "col": "neutral_kills"
+        },
+        {
+            "max": 12,
+            "min": 2,
+            "diff": 10,
+            "col": "runes_picked_up"
+        },
+        {
+            "max": 4,
+            "min": 0,
+            "diff": 4,
+            "col": "tower_kills"
+        },
+        {
+            "max": 73,
+            "min": 0,
+            "diff": 73,
+            "col": "ancient_kills"
+        },
+        {
+            "max": 100,
+            "min": 0,
+            "diff": 100,
+            "col": "died_first"
+        },
+        {
+            "max": 7,
+            "min": 1.9,
+            "diff": 5.1,
+            "col": "kda"
+        },
+        {
+            "max": 1,
+            "min": 0,
+            "diff": 1,
+            "col": "courier_kills"
+        },
+        {
+            "max": 1,
+            "min": 0,
+            "diff": 1,
+            "col": "buyback_count"
+        },
+        {
+            "max": 23,
+            "min": 23,
+            "diff": 0,
+            "col": "first_death_time"
+        },
+        {
+            "max": 1,
+            "min": 1,
+            "diff": 0,
+            "col": "destroyed_tower_lane"
+        },
+        {
+            "max": 545,
+            "min": 545,
+            "diff": 0,
+            "col": "destroyed_tower_time"
+        },
+        {
+            "max": 23,
+            "min": 23,
+            "diff": 0,
+            "col": "first_kill_time"
+        }
+    ],
+    "loading": false
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Layout, Flex, Typography } from "antd";
+import { Layout, div, Typography } from "antd";
 import "../styles/PseudoAnt.css";
 
 const { Footer } = Layout;
@@ -33,13 +33,13 @@ const PageFooter = () => {
 				padding: "2em",
 			}}
 		>
-			<Flex
+			<div
 				vertical={false}
 				style={{
 					justifyContent: "space-around",
 				}}
 			>
-				<Flex
+				<div
 					vertical={true}
 					className="page-footer-left"
 					style={{
@@ -56,8 +56,8 @@ const PageFooter = () => {
 					</Text>
 					<Text>Last updated: {lastEditDate}</Text>
 					<Text>App version: {appVersion}</Text>
-				</Flex>
-				<Flex vertical={true} className="page-footer-right">
+				</div>
+				<div vertical={true} className="page-footer-right">
 					<Text>
 						Made by{" "}
 						<a href="https://github.com/g13n4" target="_blank" rel="noreferrer">
@@ -77,8 +77,8 @@ const PageFooter = () => {
 						/>
 						)
 					</Text>
-				</Flex>
-			</Flex>
+				</div>
+			</div>
 		</Footer>
 	);
 };

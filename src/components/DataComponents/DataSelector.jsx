@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Radio } from "antd";
+import { div, Radio } from "antd";
 import "./../styles/DataSelector.css";
 import "../styles/SettingButtons.css";
 import DataSelectorAgg from "./DataSelectorAgg";
@@ -22,9 +22,9 @@ const DataSelector = ({ isData, isAggregation, isCross }) => {
 	const PickedDataSelector = getDataSelector(isData, isAggregation, isCross);
 
 	return (
-		<Flex className="data-selector">
+		<div className="data-selector">
 			<PickedDataSelector />
-		</Flex>
+		</div>
 	);
 };
 
