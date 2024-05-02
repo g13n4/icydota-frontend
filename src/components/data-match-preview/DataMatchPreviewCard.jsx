@@ -33,7 +33,7 @@ const SideText = ({ isDire, won }) => {
 };
 
 const getWinBorder = (isDire, won) => {
-	const wonBorderBase = `border border-t-0 border-b-2 ${winStyle} shadow-[#C0C0C0]/70`;
+	const wonBorderBase = `border border-t-0 border-b-2 ${winStyle} shadow-[#C0C0C0]/80`;
 
 	if (won) {
 		return isDire
@@ -51,7 +51,10 @@ const CardNameSide = ({ isDire, won, teamName }) => {
 	const ulClass = isDire ? "text-left pl-2" : "text-right pr-2";
 
 	return (
-		<ul className={`${ulClass} w-5/12 pb-1 px-0.5 ${wonBorder} `}>
+		<ul
+			className={`${ulClass} w-5/12 pb-1 px-0.5 ${wonBorder} 
+			flex flex-col items-center text-center`}
+		>
 			<SideText isDire={isDire} won={won} />
 			<li className={classData}>{teamName}</li>
 		</ul>
@@ -109,7 +112,7 @@ const CardFooter = ({ duration, gameId }) => {
 	return (
 		<div className="flex flex-row justify-between py-1 px-2 text-center align-middle">
 			<p>duration: {duration}</p>
-			<p>game id: {gameId}</p>
+			<p>id: {gameId}</p>
 		</div>
 	);
 };
@@ -121,11 +124,14 @@ const DataMatchPreviewCard = ({
 	direWon,
 	duration,
 	data,
+	onClick,
 }) => {
 	return (
 		<Card
 			className="flex flex-col px-2 pt-2 justify-center
 			hover:ring-offset-2 hover:ring-2 hover:ring-destructive cursor-pointer"
+			onClick={onClick}
+			onKeyDown={onClick}
 		>
 			<div className="flex flex-row justify-center mb-2 pb-1">
 				<CardNameSide isDire={false} won={!direWon} teamName={teamSentName} />

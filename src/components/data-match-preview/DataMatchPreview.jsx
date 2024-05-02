@@ -30,7 +30,6 @@ const DataMatchPreview = ({ selectedLeague }) => {
 				md:grid-cols-2
 				sm:grid-cols-1 overflow-x-hidden"
 				>
-					{console.log(leagueGames)}
 					{leagueGames.map((item, idx) => {
 						return (
 							<DataMatchPreviewCard
@@ -41,6 +40,9 @@ const DataMatchPreview = ({ selectedLeague }) => {
 								duration={item.duration}
 								data={item.data}
 								key={item.id}
+								onClick={() =>
+									navigate(`/${selectedLeague}/${item.id}/data/0/`)
+								}
 							/>
 						);
 					})}

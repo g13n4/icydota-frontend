@@ -10,8 +10,10 @@ const LeagueItem = ({
 	dateStart,
 	dateEnd,
 	selected,
-	routeNavigate,
+	onClick,
 }) => {
+	const navigate = useNavigate();
+
 	const selectedCard = selected ? "border-primary bg-card/75" : "bg-muted/75";
 	const selectedText = selected ? "text-primary" : "text-secondary";
 	const selectedDate = selected
@@ -23,8 +25,8 @@ const LeagueItem = ({
 			className={`mx-1 my-2 p-1.5 shadow-sm rounded-lg border border-current 
 			whitespace-normal ${selectedCard} 
 			hover:ring-2 hover:ring-primary hover:ring-inset cursor-pointer`}
-			onClick={() => routeNavigate(`/${leagueId}`)}
-			onKeyUp={() => routeNavigate(`/${leagueId}`)}
+			onClick={onClick}
+			onKeyUp={() => navigate(`/${leagueId}`)}
 		>
 			<div className={`min-h-[47px] ${selectedText}`}>
 				<h2>{laegueName}</h2>
@@ -38,11 +40,10 @@ const LeagueItem = ({
 	);
 };
 
-const Header = ({ selected }) => {
-	const { leagueMenu } = useSelector((state) => state.menu);
-
-	const { routeSelectedLeague } = useParams();
+const Header = ({ selectedLeague }) => {
 	const navigate = useNavigate();
+
+	const { leagueMenu } = useSelector((state) => state.menu);
 
 	return (
 		<header className="sticky top-0 z-10 h-[111px] border-b px-2">
@@ -53,13 +54,13 @@ const Header = ({ selected }) => {
 				{leagueMenu.map((item, idx) => {
 					return (
 						<LeagueItem
-							routeNavigate={navigate}
 							laegueName={item.label}
 							dateStart={"07/08/56"}
 							dateEnd={"07/08/56"}
 							leagueId={item.id}
-							selected={routeSelectedLeague === item.id.toString()}
+							selected={selectedLeague === item.id.toString()}
 							key={item.id}
+							onClick={() => navigate(`/${item.id}`)}
 						/>
 					);
 				})}

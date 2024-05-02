@@ -1,106 +1,123 @@
 import React, { useRef, useEffect } from "react";
-import { div, Radio, Cascader } from "antd";
-import "./../styles/DataSelector.css";
-import FlatPercentRadio from "../Reusable/FlatPercentRadio";
+import FlatPercentRadio from "../radio-buttons/FlatPercentRadio";
 import { updateSettings } from "../../actions/settings";
 import { useDispatch, useSelector } from "react-redux";
-import "../styles/SettingButtons.css";
+import CrossComparisonRadio from "../radio-buttons/CrossComparisonRadio";
+import PositionRadio from "../radio-buttons/PositionRadio";
 
-const getAggregationRadioData = () => {
-	return [
-		{
-			label: "By Position and Hero",
-			value: "hero",
-		},
-		{
-			label: "By Position and Player",
-			value: "player",
-		},
-	];
+import {
+	Select,
+	SelectContent,
+	SelectGroup,
+	SelectItem,
+	SelectLabel,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
+
+const TotalSelect = ({ data, selectedValue, onChange }) => {
+	return (
+		<Select defaultValue={selectedValue} onValueChange={onChange}>
+			<SelectTrigger className="w-[180px]">
+				<SelectValue placeholder="Select value type to compare" />
+			</SelectTrigger>
+			<SelectContent>
+				<SelectGroup>
+					{data.map((item, idx) => {
+						return (
+							<SelectItem key={item.value} value={item.value}>
+								{item.label}
+							</SelectItem>
+						);
+					})}
+				</SelectGroup>
+			</SelectContent>
+		</Select>
+	);
 };
 
-const getPositionRadioData = () => {
-	return [
-		{
-			label: "Core",
-			value: "core",
-		},
-		{
-			label: "Mid",
-			value: "mid",
-		},
-		{
-			label: "Support",
-			value: "support",
-		},
-	];
+const DataSelect = ({
+	dataLane,
+	dataGame,
+	selectedValue,
+	onChange,
+	...props
+}) => {
+	return (
+		<Select defaultValue={selectedValue} onValueChange={onChange} {...props}>
+			<SelectTrigger className="w-[180px]">
+				<SelectValue placeholder="Select value type to compare" />
+			</SelectTrigger>
+			<SelectContent>
+				<SelectGroup>
+					<SelectLabel>Early game</SelectLabel>
+					{dataLane.map((item, idx) => {
+						return (
+							<SelectItem key={item.value} value={item.value}>
+								{item.label}
+							</SelectItem>
+						);
+					})}
+				</SelectGroup>
+				<SelectGroup>
+					<SelectLabel>Full game</SelectLabel>
+					{dataGame.map((item, idx) => {
+						return (
+							<SelectItem key={item.value} value={item.value}>
+								{item.label}
+							</SelectItem>
+						);
+					})}
+				</SelectGroup>
+			</SelectContent>
+		</Select>
+	);
 };
 
-const DataSelectorCross = () => {
+const DataSelectorCross = ({ menuData, ...props }) => {
 	const dispatch = useDispatch();
 
-	const { totalFields, windowFields } = useSelector((state) => state.menu);
+	const { totalFields, windowLaneFields, windowGameFields } = useSelector(
+		(state) => state.menu,
+	);
 
-	const {
-		submenuComparisonSelected,
-		totalFieldsSelected,
-		windowFieldsSelected,
-	} = useSelector((state) => state.menuSelected);
+	const { ccompTotalField, ccompWindowField } = useSelector(
+		(state) => state.settings,
+	);
 
-	const { ccompType, ccompPosition } = useSelector((state) => state.settings);
+	const onChangeTotal = (value) => {
+		dispatch(updateSettings("ccomp_field_total", value));
+	};
 
-	const aggregationRadioData = getAggregationRadioData();
-	const positionRadioData = getPositionRadioData();
-
-	const isTotal = submenuComparisonSelected === "total";
+	const onChangeWindow = (value) => {
+		dispatch(updateSettings("ccomp_field_window", value));
+	};
 
 	return (
-		<>
-			{isTotal ? (
-				<Cascader
-					className="cascade-total"
-					changeOnSelect={true}
-					defaultValue={[totalFieldsSelected]}
-					options={totalFields}
-					onChange={(e) => {
-						dispatch(updateSettings("ccomp_field_total", e[0]));
-					}}
-				/>
-			) : (
-				<>
-					<Cascader
-						className="window-total"
-						changeOnSelect={true}
-						defaultValue={[windowFieldsSelected]}
-						options={windowFields}
-						onChange={(e) => {
-							dispatch(updateSettings("ccomp_field_window", e[0]));
-						}}
-					/>
-				</>
-			)}
+		<div {...props}>
+			{menuData.menu === 0
+				? totalFields && (
+						<TotalSelect
+							data={totalFields}
+							selectedValue={ccompTotalField}
+							onChange={onChangeTotal}
+							className="order-first justify-self-start"
+						/>
+				  )
+				: windowLaneFields &&
+				  windowGameFields && (
+						<DataSelect
+							dataLane={windowLaneFields}
+							dataGame={windowGameFields}
+							selectedValue={ccompWindowField}
+							onChange={onChangeWindow}
+							className="order-first justify-self-start"
+						/>
+				  )}
 			<FlatPercentRadio />
-			<Radio.Group
-				className="cross-aggregation-radio settings-radio"
-				options={aggregationRadioData}
-				onChange={(e) => {
-					dispatch(updateSettings("ccomp_type", e.target.value));
-				}}
-				value={ccompType}
-				optionType="button"
-				buttonStyle="solid"
-			/>
-			<Radio.Group
-				className="position-radio settings-radio"
-				options={positionRadioData}
-				onChange={(e) => {
-					dispatch(updateSettings("ccomp_position", e.target.value));
-				}}
-				value={ccompPosition}
-				optionType="button"
-				buttonStyle="solid"
-			/>
-		</>
+			<CrossComparisonRadio />
+			<PositionRadio />
+		</div>
 	);
 };
 

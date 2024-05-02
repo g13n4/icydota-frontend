@@ -22,7 +22,7 @@ const defaultSettings = {
 	ccompWindowField: "l2",
 	// comparison
 	comparison: "player",
-	flat: true,
+	flat: "flat",
 };
 
 // biome-ignore lint/style/useDefaultParameterLast: <explanation>

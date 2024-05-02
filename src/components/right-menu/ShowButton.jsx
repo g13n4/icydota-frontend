@@ -8,6 +8,7 @@ const ShowButton = ({ uiSetter }) => {
 		<div
 			className={`${buttonTheme} fixed right-[8px] top-[5px] w-[140px] bg-background/60`}
 			onClick={() => uiSetter(true)}
+			onKeyDown={() => uiSetter(true)}
 		>
 			<h1>SHOW</h1>
 		</div>

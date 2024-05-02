@@ -1,37 +1,21 @@
 import React, { useRef, useState, useEffect } from "react";
-import { div, Cascader } from "antd";
-import "./../styles/DataSelector.css";
-import ComparisonRadio from "../Reusable/ComparisonRadio";
-import GameStageRadio from "../Reusable/GameStageRadio";
-import { useDispatch, useSelector } from "react-redux";
-import { setLeagueGameSelectedAction } from "../../store/menuSelectedReducer";
-import "../styles/SettingButtons.css";
+import ComparisonRadio from "../radio-buttons/ComparisonRadio";
+import GameStageRadio from "../radio-buttons/GameStageRadio";
 
-const DataSelectorBasic = () => {
-	const dispatch = useDispatch();
-
-	const { leagueGames, leagueGamesDefault } = useSelector(
-		(state) => state.menu,
-	);
-
-	const { submenuSelected, isComparison, leagueGameSelected } = useSelector(
-		(state) => state.menuSelected,
-	);
+const DataSelectorBasic = ({ menuData, ...props }) => {
+	if (menuData.category === 0 && !menuData.isComparison) {
+		return (
+			<div {...props}>
+				<span>&nbsp;</span>
+			</div>
+		);
+	}
 
 	return (
-		<>
-			{leagueGamesDefault.length > 0 && (
-				<Cascader
-					defaultValue={[leagueGameSelected]}
-					options={leagueGames}
-					onChange={(e) => {
-						dispatch(setLeagueGameSelectedAction(e[0]));
-					}}
-				/>
-			)}
-			{submenuSelected !== "total" && <GameStageRadio />}
-			{isComparison && <ComparisonRadio />}
-		</>
+		<div {...props}>
+			{menuData.category !== 0 && <GameStageRadio />}
+			{menuData.isComparison && <ComparisonRadio />}
+		</div>
 	);
 };
 

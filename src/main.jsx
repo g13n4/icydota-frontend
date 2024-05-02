@@ -1,14 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-//import MainPage from "./components/MainPage.jsx";
 import { store } from "./store/index.js";
 import { Provider } from "react-redux";
 import { getMenu, changeTheme } from "./actions/menu";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import MainPage from "./components/routes/MainPage.jsx";
-
 import "./index.css";
-import DataContent from "./components/DataComponents/DataContent.jsx";
 store.dispatch(getMenu());
 
 // const themeData = [theme.compactAlgorithm];
@@ -35,8 +32,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 		<Provider store={store}>
 			<BrowserRouter>
 				<Routes>
-					<Route path=":routeSelectedLeague" element={<MainPage />}>
-						<Route path=":mode/:category" element={<DataContent />} />
+					<Route path=":league">
+						<Route index element={<MainPage listPage={true} />} />
+						<Route
+							path=":gameId/:modeFull/:category"
+							element={<MainPage listPage={false} />}
+						/>
 					</Route>
 					<Route path="/*" element={<Navigate replace to="/16483" />} />
 				</Routes>

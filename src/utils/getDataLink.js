@@ -1,12 +1,10 @@
-const getTableData = ({
+const getDataLink = ({
 	// menuSelected
-	leagueMenuSelected,
-	leagueGameSelected,
-	submenuSelected,
-	submenuComparisonSelected,
+	leagueId,
+	gameId,
+	mode,
 	isComparison,
-	isAggregation,
-	isCross,
+	category,
 	// settings
 	gameStage,
 	aggregationType,
@@ -18,31 +16,30 @@ const getTableData = ({
 	flat,
 }) => {
 	let link = import.meta.env.VITE_BACKEND_ENDPOINT;
-	const ccompField =
-		submenuComparisonSelected === "total" ? ccompTotalField : ccompWindowField;
+	const ccompField = category === 0 ? ccompTotalField : ccompWindowField;
 
 	const params = {
-		data_type: isComparison ? submenuComparisonSelected : submenuSelected,
-		flat: flat,
+		data_type: category,
+		flat: flat === "flat" ? true : false,
 	};
 
-	if (isCross) {
+	if (mode === "cross") {
 		const dc = "performance_cross_comparison";
-		link += `/${dc}/${leagueMenuSelected}/${ccompType}/${ccompPosition}/`;
+		link += `/${dc}/${leagueId}/${category}/${ccompType}/${ccompPosition}`;
 
 		params.data_field = ccompField;
 	} else {
 		params.game_stage = gameStage;
 
-		if (isAggregation) {
+		if (mode === "aggregation") {
 			const dc = "performance_aggregated_data";
-			link += `/${dc}/${leagueMenuSelected}/${aggregationType}/`;
+			link += `/${dc}/${leagueId}/${category}/${aggregationType}`;
 			if (isComparison) {
 				params.comparison = "general";
 			}
 		} else {
 			const dc = "performance_data";
-			link += `/${dc}/${leagueGameSelected}/`;
+			link += `/${dc}/${gameId}/${category}`;
 			if (isComparison) {
 				params.comparison = comparison;
 			}
@@ -52,4 +49,4 @@ const getTableData = ({
 	return [link, { params: params }];
 };
 
-export default getTableData;
+export default getDataLink;

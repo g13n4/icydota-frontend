@@ -1,53 +1,48 @@
 import React from "react";
-import { div, Radio } from "antd";
-import "./../styles/DataSelector.css";
-import GameStageRadio from "../Reusable/GameStageRadio";
-import FlatPercentRadio from "../Reusable/FlatPercentRadio";
+import GameStageRadio from "../radio-buttons/GameStageRadio";
+import FlatPercentRadio from "../radio-buttons/FlatPercentRadio";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSettings } from "../../actions/settings";
-import "../styles/SettingButtons.css";
+import CustomRadioGroup from "../radio-buttons/CustomRadioGroup";
 
-const getAggregationRadioData = () => {
-	return [
-		{
-			label: "By Hero",
-			value: "hero",
-		},
-		{
-			label: "By Player",
-			value: "player",
-		},
-		{
-			label: "By Position",
-			value: "position",
-		},
-	];
-};
+const aggregationRadioData = [
+	{
+		label: "By Hero",
+		tooltip: "Tournament data aggregated by hero",
+		id: "hero",
+	},
+	{
+		label: "By Player",
+		tooltip: "Tournament data aggregated by player",
+		id: "player",
+	},
+	{
+		label: "By Position",
+		tooltip: "Tournament data aggregated by position",
+		id: "position",
+	},
+];
 
-const DataSelectorAgg = () => {
-	const aggregationRadioData = getAggregationRadioData();
+const DataSelectorAgg = ({ menuData, ...props }) => {
 	const dispatch = useDispatch();
 
-	const { isComparison, submenuSelected } = useSelector(
-		(state) => state.menuSelected,
-	);
 	const { aggregationType } = useSelector((state) => state.settings);
 
+	const onChange = (value) => {
+		dispatch(updateSettings("aggregation_type", value));
+	};
+
 	return (
-		<>
-			<Radio.Group
-				className="aggregation-radio settings-radio"
-				options={aggregationRadioData}
-				onChange={(e) => {
-					dispatch(updateSettings("aggregation_type", e.target.value));
-				}}
-				value={aggregationType}
-				optionType="button"
-				buttonStyle="solid"
+		<div {...props}>
+			<CustomRadioGroup
+				data={aggregationRadioData}
+				stateCheckedName={aggregationType}
+				onChange={onChange}
+				className="order-last col-start-4 justify-self-end"
 			/>
-			{submenuSelected !== "total" && <GameStageRadio />}
-			{isComparison && <FlatPercentRadio />}
-		</>
+			{menuData.category === 0 && <GameStageRadio />}
+			{menuData.isComparison && <FlatPercentRadio />}
+		</div>
 	);
 };
 

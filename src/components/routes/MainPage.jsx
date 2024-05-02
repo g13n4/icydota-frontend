@@ -1,40 +1,15 @@
-import React, { useState } from "react";
+import MainPageData from "./MainPageData";
+import MainPageList from "./MainPageList";
+import { useSelector } from "react-redux";
 
-import RightMenu from "../right-menu/RightMenu";
-import Header from "../header/Header";
-import Footer from "../footer/Footer";
-import { Outlet, useParams } from "react-router-dom";
-import DataMatchPreview from "../data-match-preview/DataMatchPreview";
+const MainPage = ({ listPage }) => {
+	const { isLoaded } = useSelector((state) => state.menu);
 
-const MainPage = () => {
-	const { routeSelectedLeague, mode, category } = useParams();
-
-	const [uiShow, setuiShow] = useState(true);
-
-	if (mode && category) {
-		return (
-			<div className="grid h-screen w-full">
-				<RightMenu uistate={uiShow} uiSetter={setuiShow} />
-
-				<div className="flex flex-col max-w-[calc(100vw-165px)]">
-					{uiShow ? <Header selectedLeague={routeSelectedLeague} /> : ""}
-					{/* <Outlet uistate={true} /> */}
-				</div>
-				<Footer />
-			</div>
-		);
+	if (listPage) {
+		return isLoaded && <MainPageList />;
 	}
 
-	// list of games
-	return (
-		<div className="grid h-screen w-full">
-			<div className="flex flex-col max-w-[100vw]">
-				<Header selectedLeague={routeSelectedLeague} />
-				<DataMatchPreview selectedLeague={routeSelectedLeague} />
-			</div>
-			<Footer />
-		</div>
-	);
+	return isLoaded && <MainPageData />;
 };
 
 export default MainPage;

@@ -1,37 +1,17 @@
 import React from "react";
-//import DataTable from "./DataTable";
+import DataTable from "../../not-tailwind-components/DataTable";
 const { useState, useEffect } = React;
-//import DataSelector from "./DataSelector";
-import getTableData from "./../../utils/getTableData";
+import getDataLink from "../../utils/getDataLink";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import DataTableState from "./DataTableState";
-import { useParams as useRouterParams } from "react-router-dom";
 
-const DataContent = () => {
-	const {
-		routeSelectedLeague,
-		mode = "data",
-		category = "total",
-	} = useRouterParams();
-
-	const menuDataDefaut = { loading: true };
-	const [menuData, setMenuData] = useState(menuDataDefaut);
-
-	const {
-		menuSelected,
-		leagueMenuSelected,
-		leagueGameSelected,
-		submenuSelected,
-		submenuComparisonSelected,
-		totalFieldsSelected,
-		windowFieldsSelected,
-		isData,
-		isComparison,
-		isAggregation,
-		isCross,
-		isLoaded,
-	} = useSelector((state) => state.menuSelected);
+const DataContent = ({ leagueId, gameId, mode, isComparison, category }) => {
+	const [tableData, setTableData] = useState({
+		loading: true,
+		data: [],
+		error: null,
+	});
 
 	const { darkTheme } = useSelector((state) => state.menu);
 
@@ -48,43 +28,39 @@ const DataContent = () => {
 	} = useSelector((state) => state.settings);
 
 	useEffect(() => {
-		if (isLoaded) {
-			setMenuData(menuDataDefaut);
-			const [link, params] = getTableData({
-				leagueMenuSelected,
-				leagueGameSelected,
-				submenuSelected,
-				submenuComparisonSelected,
-				totalFieldsSelected,
-				windowFieldsSelected,
-				isData,
-				isComparison,
-				isAggregation,
-				isCross,
-				gameStage,
-				aggregationType,
-				aggregationComparison,
-				ccompPosition,
-				ccompType,
-				ccompTotalField,
-				ccompWindowField,
-				comparison,
-				flat,
-			});
+		setTableData({ loading: true, data: [], error: null });
+		const [link, params] = getDataLink({
+			leagueId,
+			gameId,
+			mode,
+			isComparison,
+			category,
+			// settings
+			gameStage,
+			aggregationType,
+			aggregationComparison,
+			ccompTotalField,
+			ccompWindowField,
+			ccompPosition,
+			ccompType,
+			comparison,
+			flat,
+		});
 
-			axios
-				.get(link, params)
-				.then((res) => {
-					setMenuData(res.data);
-				})
-				.catch((error) => setMenuData(error));
-		}
+		axios
+			.get(link, params)
+			.then((res) => {
+				setTableData({ loading: false, data: res.data, error: null });
+			})
+			.catch((error) =>
+				setTableData({ error: error, loading: false, data: [] }),
+			);
 	}, [
-		leagueMenuSelected,
-		leagueGameSelected,
-		submenuSelected,
-		menuSelected,
-		submenuComparisonSelected,
+		leagueId,
+		gameId,
+		mode,
+		isComparison,
+		category,
 		gameStage,
 		aggregationType,
 		aggregationComparison,
@@ -92,32 +68,19 @@ const DataContent = () => {
 		ccompType,
 		comparison,
 		flat,
-		isLoaded,
 		ccompTotalField,
 		ccompWindowField,
 	]);
 
-	return (
-		isLoaded && (
-			<div>
-				{/* <DataSelector
-					isData={isData}
-					isAggregation={isAggregation}
-					isCross={isCross}
-				/> */}
-				{!(menuData instanceof Error) ? (
-					menuData.loading ? (
-						<DataTableState darkTheme={darkTheme} loading={menuData.loading} />
-					) : (
-						<h1>{menuData}</h1>
-						//menuData && <DataTable tableData={menuData} />
-					)
-				) : (
-					<DataTableState darkTheme={darkTheme} loading={false} />
-				)}
-			</div>
-		)
-	);
+	if (tableData.loading) {
+		return <DataTableState darkTheme={darkTheme} loading={tableData.loading} />;
+	}
+
+	if (tableData.error instanceof Error) {
+		return <DataTableState darkTheme={darkTheme} loading={false} />;
+	}
+
+	return tableData.data && <DataTable tableData={tableData.data} />;
 };
 
 export default DataContent;
