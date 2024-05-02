@@ -31,14 +31,14 @@ const RightMenu = ({ uistate, uiSetter, menuData, menuDataSetter }) => {
 					menuDataSetter={menuDataSetter}
 				/>
 			</div>
-			<div className="fixed bottom-[5px] w-[157px] text-primary border-t text-center pt-1">
+			<div className="fixed bottom-[5px] w-[157px] text-primary border-t text-center pt-1 ">
 				{" "}
 				Made by{" "}
 				<a
 					href="https://github.com/g13n4"
 					target="_blank"
 					rel="noreferrer"
-					className=""
+					className="text-[#0000EE] underline"
 				>
 					g13n4
 				</a>
