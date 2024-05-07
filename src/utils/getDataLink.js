@@ -20,7 +20,6 @@ const getDataLink = ({
 
 	const params = {
 		data_type: category,
-		flat: flat === "flat" ? true : false,
 	};
 
 	if (mode === "cross") {
@@ -28,6 +27,7 @@ const getDataLink = ({
 		link += `/${dc}/${leagueId}/${category}/${ccompType}/${ccompPosition}`;
 
 		params.data_field = ccompField;
+		params.flat = flat === "flat";
 	} else {
 		params.game_stage = gameStage;
 
@@ -35,13 +35,15 @@ const getDataLink = ({
 			const dc = "performance_aggregated_data";
 			link += `/${dc}/${leagueId}/${category}/${aggregationType}`;
 			if (isComparison) {
-				params.comparison = "general";
+				params.comparison = true;
+				params.flat = flat === "flat";
 			}
 		} else {
 			const dc = "performance_data";
 			link += `/${dc}/${gameId}/${category}`;
 			if (isComparison) {
 				params.comparison = comparison;
+				params.flat = flat === "flat";
 			}
 		}
 	}

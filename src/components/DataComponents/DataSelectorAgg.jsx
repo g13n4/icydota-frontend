@@ -40,7 +40,7 @@ const DataSelectorAgg = ({ menuData, ...props }) => {
 				onChange={onChange}
 				className="order-last col-start-4 justify-self-end"
 			/>
-			{menuData.category === 0 && <GameStageRadio />}
+			{menuData.category !== 0 && <GameStageRadio />}
 			{menuData.isComparison && <FlatPercentRadio />}
 		</div>
 	);

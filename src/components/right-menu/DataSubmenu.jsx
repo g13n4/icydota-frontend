@@ -4,7 +4,8 @@ import MenuItem from "./MenuItem";
 const isArray = (value) => Array.isArray(value) && value.length > 0;
 
 const BuildLevel = ({ data, menuData, menuDataSetter, depth = 0 }) => {
-	const defaultClass = depth === 0 ? "dui-menu dui-menu-xs p-0.5" : "";
+	const defaultClass =
+		depth === 0 ? "dui-menu dui-menu-xs p-0.5 mb-[28px]" : "";
 
 	return (
 		<ul className={`${defaultClass}`}>

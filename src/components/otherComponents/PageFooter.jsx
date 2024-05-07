@@ -23,7 +23,6 @@ const PageFooter = () => {
 	const footerTheme = darkTheme
 		? "pant-dark pant-colours-dark"
 		: "pant-light pant-colours-light";
-	console.log(footerTheme);
 
 	return (
 		<Footer

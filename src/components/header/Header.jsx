@@ -8,6 +8,7 @@ const LeagueItem = ({
 	laegueName,
 	leagueId,
 	dateStart,
+	hasDates,
 	dateEnd,
 	selected,
 	onClick,
@@ -22,7 +23,7 @@ const LeagueItem = ({
 
 	return (
 		<li
-			className={`mx-1 my-2 p-1.5 shadow-sm rounded-lg border border-current 
+			className={`mx-1 my-2 p-1.5 shadow-sm rounded-lg border border-current h-max
 			whitespace-normal ${selectedCard} 
 			hover:ring-2 hover:ring-primary hover:ring-inset cursor-pointer`}
 			onClick={onClick}
@@ -32,9 +33,13 @@ const LeagueItem = ({
 				<h2>{laegueName}</h2>
 			</div>
 			<div>
-				<p className={`text-sm text-right ${selectedDate}`}>
-					{dateStart} - {dateEnd}
-				</p>
+				{hasDates ? (
+					<p className={`text-sm text-right ${selectedDate}`}>
+						{`${dateStart} - ${dateEnd}`}
+					</p>
+				) : (
+					<p>&nbsp;</p>
+				)}
 			</div>
 		</li>
 	);
@@ -42,7 +47,6 @@ const LeagueItem = ({
 
 const Header = ({ selectedLeague }) => {
 	const navigate = useNavigate();
-
 	const { leagueMenu } = useSelector((state) => state.menu);
 
 	return (
@@ -55,11 +59,11 @@ const Header = ({ selectedLeague }) => {
 					return (
 						<LeagueItem
 							laegueName={item.label}
-							dateStart={"07/08/56"}
-							dateEnd={"07/08/56"}
+							dateStart={item.start_date}
+							dateEnd={item.end_date}
 							leagueId={item.id}
-							selected={selectedLeague === item.id.toString()}
-							key={item.id}
+							selected={selectedLeague === item.key}
+							key={item.key}
 							onClick={() => navigate(`/${item.id}`)}
 						/>
 					);

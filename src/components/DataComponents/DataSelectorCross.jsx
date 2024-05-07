@@ -95,7 +95,7 @@ const DataSelectorCross = ({ menuData, ...props }) => {
 
 	return (
 		<div {...props}>
-			{menuData.menu === 0
+			{menuData.category === 0
 				? totalFields && (
 						<TotalSelect
 							data={totalFields}

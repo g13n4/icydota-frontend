@@ -4,6 +4,7 @@ import ComparisonButton from "./ComparisonButton";
 import { useSelector } from "react-redux";
 import DataSubmenu from "./DataSubmenu";
 import DataMenu from "./DataMenu";
+import RightFooter from "./RightFooter";
 
 const HideButton = ({ uiSetter }) => {
 	return (
@@ -30,18 +31,6 @@ const RightMenu = ({ uistate, uiSetter, menuData, menuDataSetter }) => {
 					menuData={menuData}
 					menuDataSetter={menuDataSetter}
 				/>
-			</div>
-			<div className="fixed bottom-[5px] w-[157px] text-primary border-t text-center pt-1 ">
-				{" "}
-				Made by{" "}
-				<a
-					href="https://github.com/g13n4"
-					target="_blank"
-					rel="noreferrer"
-					className="text-[#0000EE] underline"
-				>
-					g13n4
-				</a>
 			</div>
 		</aside>
 	) : (

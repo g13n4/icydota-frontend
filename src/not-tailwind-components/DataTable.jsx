@@ -37,10 +37,10 @@ const getColours = (isDarkTheme) => {
 	];
 };
 
-const nanColour = "#a4a7a5d6";
+const nanColour = "rgba(164,167,165, 0.25)";
 
 const getTargetColor = (colours, value, min, max) => {
-	if (Number.isNaN(Number(value))) {
+	if (Number.isNaN(Number(value)) | (null === value)) {
 		return nanColour;
 	}
 	if (min === max && value) {
@@ -50,6 +50,11 @@ const getTargetColor = (colours, value, min, max) => {
 	const colourIndex = Math.floor(((value - min) / (max - min)) * 10);
 
 	return colours[colourIndex];
+};
+
+const getTargetColourNew = (colours, value, valueDict) => {
+	const index = valueDict[String(value)];
+	return colours[index];
 };
 
 const DataTable = ({ tableData, hoverHighlight }) => {
@@ -67,7 +72,7 @@ const DataTable = ({ tableData, hoverHighlight }) => {
 			layoutWidthType: "colAdaptive",
 		},
 		conditions: {
-			background: tableData.table_values.map((item) => {
+			background: tableData.value_mapping.map((item) => {
 				return {
 					field: item.col,
 					mapping(value) {

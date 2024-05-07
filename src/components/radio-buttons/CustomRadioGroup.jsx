@@ -8,13 +8,6 @@ const CustomRadioGroup = ({ data, stateCheckedName, onChange, className }) => {
 			}`}
 		>
 			{data.map((item, idx) => {
-				console.log(
-					stateCheckedName === item.label,
-					stateCheckedName === item.id,
-					stateCheckedName,
-					item.label,
-					item.id,
-				);
 				return (
 					<RadioItem
 						labelText={item.label}

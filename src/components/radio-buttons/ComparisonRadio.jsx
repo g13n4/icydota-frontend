@@ -30,6 +30,7 @@ const ComparisonRadio = () => {
 			data={comparisonRadioList}
 			stateCheckedName={comparison}
 			onChange={onChange}
+			className={"place-self-start"}
 		/>
 	);
 };
