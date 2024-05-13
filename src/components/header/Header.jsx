@@ -1,7 +1,5 @@
 import React from "react";
-
-import MenuResponse from "/menuResp.json";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const LeagueItem = ({
@@ -16,7 +14,7 @@ const LeagueItem = ({
 	const navigate = useNavigate();
 
 	const selectedCard = selected ? "border-primary bg-card/75" : "bg-muted/75";
-	const selectedText = selected ? "text-primary" : "text-secondary";
+	const selectedText = selected ? "text-primary" : "";
 	const selectedDate = selected
 		? "text-card-foreground"
 		: "text-muted-foreground";
@@ -45,17 +43,19 @@ const LeagueItem = ({
 	);
 };
 
-const Header = ({ selectedLeague }) => {
+const Header = ({ selectedLeague, sticky = true }) => {
 	const navigate = useNavigate();
 	const { leagueMenu } = useSelector((state) => state.menu);
+	const stickyHeader = sticky ? "sticky top-0 z-10" : "";
 
 	return (
-		<header className="sticky top-0 z-10 h-[111px] border-b px-2">
+		<header className={`${stickyHeader} h-[111px] border-b px-2`}>
 			<ul
 				className="grid grid-flow-col list-none grid-rows-1 px-4]
 			overflow-x-scroll auto-cols-[200px]"
 			>
 				{leagueMenu.map((item, idx) => {
+					console.log(item);
 					return (
 						<LeagueItem
 							laegueName={item.label}

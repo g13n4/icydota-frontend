@@ -38,7 +38,7 @@ const DataSelectorAgg = ({ menuData, ...props }) => {
 				data={aggregationRadioData}
 				stateCheckedName={aggregationType}
 				onChange={onChange}
-				className="order-last col-start-4 justify-self-end"
+				className="order-last xl:col-start-4 xl:justify-self-end"
 			/>
 			{menuData.category !== 0 && <GameStageRadio />}
 			{menuData.isComparison && <FlatPercentRadio />}

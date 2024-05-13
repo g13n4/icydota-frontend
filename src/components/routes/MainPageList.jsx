@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Header from "../header/Header";
-import Footer from "../footer/Footer";
-import { Outlet, useParams } from "react-router-dom";
-import DataMatchPreview from "../data-match-preview/DataMatchPreview";
+import { useParams } from "react-router-dom";
+import DataMatchPreview from "../data-match-preview-cards/DataMatchPreview";
+import SettingsButton from "../settings-button/SettingsButton";
 
 const MainPageList = () => {
 	const { league } = useParams();
@@ -11,6 +11,7 @@ const MainPageList = () => {
 		<div className="grid h-screen w-full">
 			<div className="flex flex-col max-w-[100vw]">
 				<Header selectedLeague={league} />
+				<SettingsButton tableView={false} />
 				<DataMatchPreview selectedLeague={league} />
 			</div>
 		</div>

@@ -52,24 +52,24 @@ const getTargetColor = (colours, value, min, max) => {
 	return colours[colourIndex];
 };
 
-const getTargetColourNew = (colours, value, valueDict) => {
-	const index = valueDict[String(value)];
-	return colours[index];
-};
-
-const DataTable = ({ tableData, hoverHighlight }) => {
+const DataTable = ({ tableData, hoverHighlight, isVertical }) => {
 	const { darkTheme } = useSelector((state) => state.menu);
 
 	const colours = getColours(darkTheme);
 
+	const mobileOptions = isVertical
+		? {
+				layoutWidthType: "compact",
+		  }
+		: {
+				layoutWidthType: "colAdaptive",
+		  };
+
 	const tableOptions = {
-		width: 150,
+		...mobileOptions,
 		interaction: {
 			selectedCellsSpotlight: false,
 			hoverHighlight: hoverHighlight,
-		},
-		style: {
-			layoutWidthType: "colAdaptive",
 		},
 		conditions: {
 			background: tableData.value_mapping.map((item) => {
@@ -100,7 +100,7 @@ const DataTable = ({ tableData, hoverHighlight }) => {
 			}}
 			adaptive={{
 				width: true,
-				height: false,
+				height: true,
 				getContainer: () => document.getElementById("dota-data-table"),
 			}}
 			sheetType="pivot"

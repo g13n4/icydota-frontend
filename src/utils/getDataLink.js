@@ -14,12 +14,15 @@ const getDataLink = ({
 	ccompTotalField,
 	ccompWindowField,
 	flat,
+	// table params
+	vertical,
 }) => {
 	let link = import.meta.env.VITE_BACKEND_ENDPOINT;
 	const ccompField = category === 0 ? ccompTotalField : ccompWindowField;
 
 	const params = {
 		data_type: category,
+		vertical,
 	};
 
 	if (mode === "cross") {

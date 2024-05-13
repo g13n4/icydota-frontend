@@ -29,7 +29,7 @@ const FlatPercentRadio = ({ className }) => {
 			data={flatPercent}
 			stateCheckedName={flat}
 			onChange={onChange}
-			className={`order-3 col-start-3 col-end-3 ${className}`}
+			className={`order-3 xl:col-start-3 xl:col-end-3 ${className}`}
 		/>
 	);
 };

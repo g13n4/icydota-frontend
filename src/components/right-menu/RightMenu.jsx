@@ -4,7 +4,6 @@ import ComparisonButton from "./ComparisonButton";
 import { useSelector } from "react-redux";
 import DataSubmenu from "./DataSubmenu";
 import DataMenu from "./DataMenu";
-import RightFooter from "./RightFooter";
 
 const HideButton = ({ uiSetter }) => {
 	return (

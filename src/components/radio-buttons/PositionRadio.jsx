@@ -32,7 +32,7 @@ const PositionRadio = () => {
 			data={positionRadioData}
 			stateCheckedName={ccompPosition}
 			onChange={onChange}
-			className="order-4 col-start-4"
+			className="order-4 xl:col-start-4"
 		/>
 	);
 };

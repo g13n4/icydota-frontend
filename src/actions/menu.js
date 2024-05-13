@@ -2,18 +2,16 @@ import axios from "axios";
 import {
 	setMenuAction,
 	updateLeagueGamesAction,
-	changeDefaultThemeAction,
+	changeDefaultThemeBoolAction,
 } from "./../store/menuReducer";
 import { setLeagueGameSelectedAction } from "./../store/menuSelectedReducer";
 
 export const getMenu = () => {
-	return (dispatch, getState) => {
+	return (dispatch) => {
 		axios
 			.get(`${import.meta.env.VITE_BACKEND_ENDPOINT}/default_menu_data/`)
 			.then((res) => {
 				dispatch(setMenuAction(res.data)); // loading default menu
-
-				const state = getState();
 			});
 	};
 };
@@ -29,8 +27,8 @@ export const getLeagueGames = (leagueId) => {
 	};
 };
 
-export const changeTheme = () => {
+export const changeThemeBool = (IsDarkTheme) => {
 	return (dispatch) => {
-		dispatch(changeDefaultThemeAction());
+		dispatch(changeDefaultThemeBoolAction(IsDarkTheme));
 	};
 };

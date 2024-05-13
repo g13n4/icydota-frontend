@@ -37,7 +37,7 @@ const GameStageRadio = () => {
 			data={gameStageList}
 			stateCheckedName={gameStage}
 			onChange={onChange}
-			className="order-first col-start-1 col-end-1  justify-self-start"
+			className="order-first xl:col-start-1 xl:col-end-1  xl:justify-self-start"
 		/>
 	);
 };

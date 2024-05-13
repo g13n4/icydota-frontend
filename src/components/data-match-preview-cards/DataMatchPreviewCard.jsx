@@ -4,7 +4,8 @@ import { Card } from "@/components/ui/card";
 
 const direColour = "!text-red-600";
 const sentinelColour = "!text-green-600";
-const winStyle = "border-[#FFD700] shadow-md ";
+const winstyleWOShadow = "border-[#FFD700]";
+const winStyle = `${winstyleWOShadow} shadow-md`;
 
 const SideName = ({ isDire }) => {
 	return isDire ? (
@@ -66,7 +67,7 @@ const CardData = ({ data, direWon }) => {
 	const dataCellClass = "";
 	const centralCellClass = "w-2/12 ";
 
-	const winBorderStyle = `border border-y-0  ${winStyle}`;
+	const winBorderStyle = `border border-y-0  ${winstyleWOShadow}`;
 
 	const direWinStyle = direWon ? `${winBorderStyle} border-l-2 border-r-0` : "";
 	const sentWinStyle = direWon ? "" : `${winBorderStyle} border-r-2 border-l-0`;

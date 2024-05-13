@@ -7,7 +7,7 @@ const ComparisonButton = ({ menuData, menuDataSetter }) => {
 	// ON / OFF STYLE
 	const baseStateStyle = "px-1";
 	const OnStateStyle = `${baseStateStyle} text-primary `;
-	const OffStateStyle = `${baseStateStyle} text-muted`;
+	const OffStateStyle = `${baseStateStyle} font-bold text-muted-foreground`;
 
 	if (menuData.mode === "cross") {
 		return (

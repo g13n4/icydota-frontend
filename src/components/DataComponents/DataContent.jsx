@@ -13,7 +13,7 @@ const DataContent = ({ leagueId, gameId, mode, isComparison, category }) => {
 		error: null,
 	});
 
-	const { darkTheme } = useSelector((state) => state.menu);
+	const { darkTheme, tableVertical } = useSelector((state) => state.menu);
 
 	const {
 		gameStage,
@@ -45,6 +45,7 @@ const DataContent = ({ leagueId, gameId, mode, isComparison, category }) => {
 			ccompType,
 			comparison,
 			flat,
+			vertical: tableVertical,
 		});
 
 		axios
@@ -70,6 +71,7 @@ const DataContent = ({ leagueId, gameId, mode, isComparison, category }) => {
 		flat,
 		ccompTotalField,
 		ccompWindowField,
+		tableVertical,
 	]);
 
 	if (tableData.loading) {
@@ -80,7 +82,11 @@ const DataContent = ({ leagueId, gameId, mode, isComparison, category }) => {
 		return <DataTableState darkTheme={darkTheme} loading={false} />;
 	}
 
-	return tableData.data && <DataTable tableData={tableData.data} />;
+	return (
+		tableData.data && (
+			<DataTable tableData={tableData.data} isVertical={tableVertical} />
+		)
+	);
 };
 
 export default DataContent;

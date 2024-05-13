@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 
 import RightMenu from "../right-menu/RightMenu";
 import Header from "../header/Header";
-import Footer from "../footer/Footer";
 import { Navigate, useParams, useNavigate } from "react-router-dom";
 import DataContent from "../DataComponents/DataContent";
 import { useSelector } from "react-redux";
 import redirectBuilder from "../../utils/redirectBuilder";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import DataSelector from "../DataComponents/DataSelector";
+import SettingsButton from "../settings-button/SettingsButton";
+import { Settings } from "lucide-react";
+import DataCardHeader from "../DataComponents/DataCardHeader";
 
 const allModes = {
 	data: ["data", false],
@@ -86,13 +88,14 @@ const MainPageData = () => {
 					uiShow ? "max-w-[calc(100vw-157px)]" : "w-full"
 				} bg-background`}
 			>
-				{uiShow && <Header selectedLeague={league} />}
-				<Card className="mx-7 my-5 rounded-none">
-					<CardHeader>
-						<CardTitle className="text-center">
-							{categoriesDict[menuData.category]}
-						</CardTitle>
-					</CardHeader>
+				{uiShow && <Header selectedLeague={league} sticky={false} />}
+				<SettingsButton tableView={true} />
+				<Card className="mx-7 my-5 rounded-none text-center">
+					<DataCardHeader
+						headerText={categoriesDict[menuData.category]}
+						iconSize={36}
+						leagueId={league}
+					/>
 					<CardContent>
 						<DataSelector menuData={menuData} />
 						<DataContent

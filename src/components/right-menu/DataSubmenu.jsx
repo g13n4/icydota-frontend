@@ -17,7 +17,7 @@ const BuildLevel = ({ data, menuData, menuDataSetter, depth = 0 }) => {
 								key={element.key}
 								isSelected={element.key === menuData.categoryParent}
 								itemText={element.label}
-								itemTooltip={element.label}
+								itemTooltip={element.description}
 								buttonIcon={element.label}
 								inSummary={true}
 							/>
@@ -37,10 +37,52 @@ const BuildLevel = ({ data, menuData, menuDataSetter, depth = 0 }) => {
 						itemText={element.label}
 						itemTooltip={element.label}
 						buttonIcon={element.label}
+						withTooltipIcon={false}
 						onClick={() => {
 							menuDataSetter(element.id, element.parent);
 						}}
 					/>
+				);
+			})}
+		</ul>
+	);
+};
+
+const BuildLevelNew = ({ data, menuData, menuDataSetter, depth = 0 }) => {
+	const defaultClass =
+		depth === 0 ? "dui-menu dui-menu-xs p-0.5 mb-[28px]" : "";
+
+	return (
+		<ul className={`${defaultClass}`}>
+			{data.map((element, idx) => {
+				return (
+					<li key={`li-${element.key}`}>
+						<details open={false}>
+							<MenuItem
+								key={element.key}
+								isSelected={element.key === menuData.categoryParent}
+								itemText={element.label}
+								itemTooltip={element.tooltip}
+								buttonIcon={element.label}
+								inSummary={true}
+							/>
+							{element.children.map((sub_element, idx) => {
+								return (
+									<MenuItem
+										key={sub_element.key}
+										isSelected={sub_element.id === menuData.category}
+										itemText={sub_element.label}
+										itemTooltip={sub_element.label}
+										buttonIcon={sub_element.label}
+										withTooltipIcon={false}
+										onClick={() => {
+											menuDataSetter(sub_element.id, sub_element.parent);
+										}}
+									/>
+								);
+							})}
+						</details>
+					</li>
 				);
 			})}
 		</ul>

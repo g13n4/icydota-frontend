@@ -14,20 +14,31 @@ import {
 	Swords,
 	View,
 	MessageCircleQuestion,
+	Crosshair,
+	Mountain,
+	Sword,
+	EyeOff,
 } from "lucide-react";
 
 const getButtonComponent = (buttonName) => {
-	switch (buttonName) {
+	console.log(buttonName);
+	switch (buttonName.toLowerCase()) {
 		case "info":
 			return Info;
 		case "gold":
 			return HandCoins;
-		case "exp":
+		case "pings":
+			return Crosshair;
+		case "interval":
+			return Mountain;
+		case "xp":
 			return Book;
-		case "kda":
+		case "damage":
 			return Swords;
 		case "wards":
 			return View;
+		case "deward":
+			return EyeOff;
 		default:
 			return MessageCircleQuestion;
 	}
@@ -41,6 +52,7 @@ const MenuItem = ({
 	inSummary = false,
 	onClick,
 	iconSize = 16,
+	withTooltipIcon = true,
 }) => {
 	const IconComponent = getButtonComponent(buttonIcon);
 	const triggerRef = useRef(null);
@@ -81,14 +93,14 @@ const MenuItem = ({
 			onKeyDown={onClick}
 		>
 			<a className="flex flex-row">
-				<ToolTip />
+				{withTooltipIcon && <ToolTip />}
 				<ItemText className="px-2" />
 			</a>
 		</summary>
 	) : (
 		<li className={selectedTextClass} onClick={onClick} onKeyDown={onClick}>
 			<a>
-				<ToolTip />
+				{withTooltipIcon && <ToolTip />}
 				<ItemText />
 			</a>
 		</li>

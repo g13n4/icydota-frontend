@@ -1,28 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const DataTableState = ({ darkTheme, loading }) => {
+const DataTableState = ({ loading }) => {
+	const [dotCount, setDotCount] = useState(1);
+
+	useEffect(() => {
+		setInterval(() => setDotCount((oldCount) => (oldCount + 1) % 3), 1000);
+	}, []);
+
 	return (
 		<div
-		// style={{
-		// 	border: "3px",
-		// 	borderStyle: "dashed",
-		// 	borderColor: darkTheme ? "white" : "black",
-
-		// 	paddingTop: "15em",
-		// 	paddingBottom: "15em",
-		// 	paddingLeft: "1em",
-		// 	paddingRight: "1em",
-		// 	margin: "1em",
-		// 	alignItems: "center",
-		// 	justifyItems: "center",
-		// 	justifyContent: "center",
-		// }}
+			className="border-4 border-dashed border-border py-16 px-2 m-1 
+			align-middle "
 		>
 			{loading ? (
-				<h1>loading animation</h1>
+				<>
+					<span className="dui-loading dui-loading-ring dui-loading-lg">
+						loading
+					</span>
+					<h1 className="py-4">loading{".".repeat(dotCount + 1)}</h1>
+				</>
 			) : (
-				<h1>
-					Data is currently unavailable (but it should be). It will be fixed in
+				<h1 className="py-4">
+					Data is currently unavailable (but it should be!). It will be fixed in
 					the next version.
 				</h1>
 			)}

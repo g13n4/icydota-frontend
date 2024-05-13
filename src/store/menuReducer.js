@@ -1,8 +1,11 @@
+import { isMobile } from "react-device-detect";
 import {
 	SET_DEFAULT_MENU,
 	UPDATE_LEAGUE_GAMES,
 	SET_DEFAULT_MENU_FIELDS,
-	CHANGE_DEFAULT_THEME,
+	CHANGE_DEFAULT_THEME_BOOL,
+	CHANGE_DEFAULT_THEME_STR,
+	CHANGE_TABLE_VERTICAL,
 } from "./menuConstants";
 
 const defaultMenuState = {
@@ -17,6 +20,7 @@ const defaultMenuState = {
 	windowGameFields: [],
 	categoriesDict: {},
 
+	tableVertical: false,
 	darkTheme: false,
 	lastEditDate: "",
 	appVersion: "",
@@ -30,20 +34,52 @@ const toMenuDefaultField = (objs, value = false) => {
 	return objs[0].key.toString();
 };
 
+const setTheme = ({ themeStr = "system", setDark = null }) => {
+	const root = window.document.documentElement;
+
+	root.classList.remove("light", "dark");
+
+	if (setDark !== null) {
+		const systemTheme = setDark ? "dark" : "light";
+		root.classList.add(systemTheme);
+		return setDark;
+	}
+
+	if (themeStr === "system") {
+		const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+			.matches
+			? "dark"
+			: "light";
+
+		root.classList.add(systemTheme);
+		return systemTheme === "dark" ? true : false;
+	}
+
+	root.classList.add(themeStr);
+	return themeStr === "dark" ? true : false;
+};
+
 // biome-ignore lint/style/useDefaultParameterLast: <explanation>
 export const menuStateReducer = (state = defaultMenuState, action) => {
 	switch (action.type) {
 		case SET_DEFAULT_MENU: {
 			// setting up dark theme
-			const root = window.document.documentElement;
-			const systemTheme = window.matchMedia(
-				"(prefers-color-scheme: dark)",
-			).matches;
-
-			return { ...state, ...action.payload, darkTheme: systemTheme };
+			const systemTheme = setTheme({});
+			return {
+				...state,
+				...action.payload,
+				darkTheme: systemTheme,
+				tableVertical: isMobile,
+			};
 		}
-		case CHANGE_DEFAULT_THEME:
-			return { ...state, darkTheme: !state.darkTheme };
+		case CHANGE_DEFAULT_THEME_BOOL:
+			return { ...state, darkTheme: setTheme({ setDark: !state.darkTheme }) };
+
+		case CHANGE_DEFAULT_THEME_STR:
+			return { ...state, darkTheme: setTheme({ themeStr: action.payload }) };
+
+		case CHANGE_TABLE_VERTICAL:
+			return { ...state, tableVertical: !state.tableVertical };
 
 		default:
 			return state;
@@ -61,7 +97,12 @@ export const setDefaultMenuFieldsAction = (payload) => ({
 	payload,
 });
 
-export const changeDefaultThemeAction = (payload) => ({
-	type: CHANGE_DEFAULT_THEME,
+export const changeDefaultThemeBoolAction = (payload) => ({
+	type: CHANGE_DEFAULT_THEME_BOOL,
+	payload,
+});
+
+export const changeTableVerticalAction = (payload) => ({
+	type: CHANGE_TABLE_VERTICAL,
 	payload,
 });
