@@ -3,7 +3,7 @@ const ComparisonButton = ({ menuData, menuDataSetter }) => {
 		"px-[8px] my-[3px] border h-[65px] flex flex-col items-center justify-center";
 	const isComparisonTheme = `${baseTheme} border-primary cursor-pointer`;
 	const notComparisonTheme = `${baseTheme} cursor-pointer`;
-	const disabledButtonTheme = `${baseTheme} bg-muted text-muted cursor-not-allowed`;
+	const disabledButtonTheme = `${baseTheme} bg-muted/10 text-muted cursor-not-allowed`;
 	// ON / OFF STYLE
 	const baseStateStyle = "px-1";
 	const OnStateStyle = `${baseStateStyle} text-primary `;

@@ -1,6 +1,8 @@
 export default {
 	plugins: {
 		tailwindcss: {},
-		autoprefixer: {},
+		autoprefixer: {
+			...(process.env.VITE_NANO_CSS === true ? { cssnano: {} } : {}),
+		},
 	},
 };

@@ -27,7 +27,7 @@ const MainPageData = () => {
 	const { league, gameId, modeFull, category } = useParams();
 
 	if (allModes[modeFull] === undefined) {
-		return <Navigate replace to="/16483" />;
+		return <Navigate replace to="/" />;
 	}
 
 	const [mode, isComparison] = allModes[modeFull];

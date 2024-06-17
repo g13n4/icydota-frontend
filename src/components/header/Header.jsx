@@ -13,8 +13,8 @@ const LeagueItem = ({
 }) => {
 	const navigate = useNavigate();
 
-	const selectedCard = selected ? "border-primary bg-card/75" : "bg-muted/75";
-	const selectedText = selected ? "text-primary" : "";
+	const selectedCard = selected ? "border-primary bg-card/70" : "bg-card/65";
+	const selectedText = selected ? "text-primary" : "text-foreground/90";
 	const selectedDate = selected
 		? "text-card-foreground"
 		: "text-muted-foreground";
@@ -55,7 +55,6 @@ const Header = ({ selectedLeague, sticky = true }) => {
 			overflow-x-scroll auto-cols-[200px]"
 			>
 				{leagueMenu.map((item, idx) => {
-					console.log(item);
 					return (
 						<LeagueItem
 							laegueName={item.label}

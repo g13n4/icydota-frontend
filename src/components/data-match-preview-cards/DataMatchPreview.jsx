@@ -20,7 +20,7 @@ const DataMatchPreview = ({ selectedLeague }) => {
 
 	return (
 		leagueGames && (
-			<main className="overflow-auto py-5 bg-background px-4">
+			<main className="overflow-auto pb-5 bg-background px-4">
 				<ul
 					className="grid list-none gap-x-3 gap-y-2.5
 				px-2
