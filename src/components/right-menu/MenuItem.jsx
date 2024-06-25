@@ -21,7 +21,6 @@ import {
 } from "lucide-react";
 
 const getButtonComponent = (buttonName) => {
-	console.log(buttonName);
 	switch (buttonName.toLowerCase()) {
 		case "info":
 			return Info;
